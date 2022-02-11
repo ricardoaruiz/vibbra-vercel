@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> should render the heading 1`] = `
+.c0 {
+  height: 60px;
+}
+
+.c1 {
+  border: 1px solid #8F8F8F;
+  border-radius: 0.5rem;
+  padding: 1rem 0.5rem;
+  outline: none;
+  font-size: 1.6rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.c1::-webkit-input-placeholder {
+  color: #8F8F8F;
+}
+
+.c1::-moz-placeholder {
+  color: #8F8F8F;
+}
+
+.c1:-ms-input-placeholder {
+  color: #8F8F8F;
+}
+
+.c1::placeholder {
+  color: #8F8F8F;
+}
+
+<main
+  class="c0"
+>
+  <input
+    class="c1"
+    type="text"
+  />
+</main>
+`
