@@ -4,16 +4,28 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { Button, Input, Logo } from 'components'
+import { Alert, Button, Input, Logo } from 'components'
 import { useAuth, ServiceError, useLocalStorage } from 'service'
-import { AuthenticationResponse } from './api/authenticate/types'
+import { AuthenticationResult } from 'service/useAuth/type'
+
+// Constante error messages from page
+const ERROR_MESSAGES = {
+  login: {
+    required: 'Login is required'
+  },
+  password: {
+    minLength: 'Password must be at least 4 characters long'
+  },
+  generic: {
+    review: 'Review this information',
+    invalidCredential: 'Incorrect user or password',
+    invalidaAppToken: 'Incorrect user or app token'
+  }
+}
 
 const schema = yup.object().shape({
-  login: yup.string().required('User is required'),
-  password: yup
-    .string()
-    .min(4, 'Password must be at least 4 characters long')
-    .required('This field is required')
+  login: yup.string().required(ERROR_MESSAGES.login.required),
+  password: yup.string().min(4, ERROR_MESSAGES.password.minLength)
 })
 
 type FormData = {
@@ -27,14 +39,19 @@ export default function Login() {
   const router = useRouter()
   const { signin, signinSSO } = useAuth()
   const { setToken } = useLocalStorage()
+
   const [login, setLogin] = React.useState('')
   const [userError, setUserError] = React.useState('')
+  const [isLogging, setIsLogging] = React.useState(false)
+  const [isLoggingSSO, setIsLoggingSSO] = React.useState(false)
+  const [loginError, setLoginError] = React.useState('')
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
+    setError
   } = useForm<FormData>({
     resolver: yupResolver(schema)
   })
@@ -43,7 +60,7 @@ export default function Login() {
    * Handle login successfuly
    */
   const handleLoginSuccess = React.useCallback(
-    (response: AuthenticationResponse | undefined) => {
+    (response: AuthenticationResult | undefined) => {
       setToken(response?.token)
       setLogin('')
       reset()
@@ -54,21 +71,44 @@ export default function Login() {
   )
 
   /**
+   * Handle login error
+   */
+  const handleLoginError = React.useCallback(
+    (error: unknown, isSSO = false) => {
+      const serviceError = error as ServiceError
+      if (+serviceError.status === 401) {
+        setError('login', { message: ERROR_MESSAGES.generic.review })
+        !isSSO &&
+          setError('password', { message: ERROR_MESSAGES.generic.review })
+        setLoginError(
+          !isSSO
+            ? ERROR_MESSAGES.generic.invalidCredential
+            : ERROR_MESSAGES.generic.invalidaAppToken
+        )
+        return
+      }
+      setLoginError(serviceError.statusText)
+    },
+    [setError]
+  )
+
+  /**
    * Signin with user and password
    */
   const handleSignin = React.useCallback(
     async (data: FormData) => {
       try {
+        setIsLogging(true)
         const { login, password } = data
         const response = await signin(login, password)
         handleLoginSuccess(response)
       } catch (error) {
-        // TODO tratar o erro
-        const serviceError = error as ServiceError
-        console.log('deu erro', serviceError)
+        handleLoginError(error)
+      } finally {
+        setIsLogging(false)
       }
     },
-    [handleLoginSuccess, signin]
+    [handleLoginError, handleLoginSuccess, signin]
   )
 
   /**
@@ -76,20 +116,29 @@ export default function Login() {
    */
   const handleSigninSSO = React.useCallback(async () => {
     try {
+      reset()
+
       if (!login) {
-        setUserError('User is required')
+        setUserError(ERROR_MESSAGES.login.required)
         return
       }
 
-      // Passando o app_token fixo
+      setIsLoggingSSO(true)
       const response = await signinSSO(login, `${login}AppToken1`)
       handleLoginSuccess(response)
     } catch (error) {
-      // TODO tratar o erro
-      const serviceError = error as ServiceError
-      console.log('deu erro', serviceError)
+      handleLoginError(error, true)
+    } finally {
+      setIsLoggingSSO(false)
     }
-  }, [login, signinSSO, handleLoginSuccess])
+  }, [reset, login, signinSSO, handleLoginSuccess, handleLoginError])
+
+  /**
+   *
+   */
+  const handleCloseError = React.useCallback(() => {
+    setLoginError('')
+  }, [])
 
   /**
    *
@@ -110,7 +159,7 @@ export default function Login() {
           <Input
             type="text"
             id="login"
-            placeholder="User"
+            placeholder="Login"
             value={login}
             {...register('login')}
             onInput={(event) => {
@@ -126,11 +175,24 @@ export default function Login() {
             error={errors.password?.message}
           />
 
-          <Button>Signin</Button>
-
-          <Button type="button" onClick={handleSigninSSO}>
-            Signin with SSO
+          <Button disabled={!!loginError || isLogging || isLoggingSSO}>
+            {isLogging ? 'Signin...' : 'Signin'}
           </Button>
+
+          <Button
+            type="button"
+            onClick={handleSigninSSO}
+            disabled={!!loginError || isLogging || isLoggingSSO}
+          >
+            {isLoggingSSO ? 'Signin with SSO...' : 'Signin with SSO'}
+          </Button>
+
+          <Alert
+            message={loginError}
+            variant="error"
+            show={!!loginError}
+            onClose={handleCloseError}
+          />
         </S.Form>
       </S.RightSide>
     </S.Main>

@@ -31,7 +31,9 @@ export default {
     lightGray: '#EAEAEA',
     gray: '#8F8F8F',
     darkGray: '#2E2F42',
-    danger: '#f00'
+    success: '#0cac21',
+    danger: '#f00',
+    warning: '#f5861f'
   },
   spacings: {
     xxsmall: '0.8rem',

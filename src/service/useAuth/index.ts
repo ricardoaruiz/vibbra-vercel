@@ -1,5 +1,5 @@
 import { AuthenticationResponse } from 'pages/api/authenticate/types'
-import { UseAuthType } from './type'
+import { AuthenticationResult, UseAuthType } from './type'
 import { useApi } from '../useApi'
 
 const AUTH_BASE_URL = '/authenticate'
@@ -16,7 +16,7 @@ export const useAuth = (): UseAuthType => {
   const signin = async (
     login: string,
     password: string
-  ): Promise<AuthenticationResponse | undefined> => {
+  ): Promise<AuthenticationResult | undefined> => {
     const resp = await post<AuthenticationResponse>(AUTH_BASE_URL, {
       login,
       password
@@ -34,7 +34,7 @@ export const useAuth = (): UseAuthType => {
   const signinSSO = async (
     login: string,
     appToken: string
-  ): Promise<AuthenticationResponse | undefined> => {
+  ): Promise<AuthenticationResult | undefined> => {
     const resp = await post<AuthenticationResponse>(`${AUTH_BASE_URL}/sso`, {
       login,
       app_token: appToken

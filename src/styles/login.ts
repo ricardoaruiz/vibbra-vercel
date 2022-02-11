@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 import { Button } from 'components/Button/styles'
+import { Alert } from 'components/Alert/styles'
 
 import { Wrapper } from 'components/Logo/styles'
 
@@ -46,6 +47,7 @@ export const LeftSide = styled.section`
 
 export const RightSide = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 1;
@@ -55,8 +57,11 @@ export const RightSide = styled.section`
 export const Form = styled.form`
   ${({ theme }) => css`
     width: 100%;
+    min-height: 330px;
     max-width: 35rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 
     & h2 {
       text-align: center;
@@ -71,6 +76,10 @@ export const Form = styled.form`
 
     ${Button} + ${Button} {
       margin-top: 1rem;
+    }
+
+    ${Alert} {
+      margin-top: 2rem;
     }
   `};
 `

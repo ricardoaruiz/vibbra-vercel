@@ -1,4 +1,4 @@
-import { AuthenticationResponse } from 'pages/api/authenticate/types'
+import { User } from 'service/model/user'
 
 export type UseAuthType = {
   /**
@@ -6,10 +6,11 @@ export type UseAuthType = {
    * @param login
    * @param password
    * @returns logged user data and token
-   */ signin: (
+   */
+  signin: (
     login: string,
     password: string
-  ) => Promise<AuthenticationResponse | undefined>
+  ) => Promise<AuthenticationResult | undefined>
 
   /**
    * Perform SSO login
@@ -20,5 +21,10 @@ export type UseAuthType = {
   signinSSO: (
     login: string,
     appToken: string
-  ) => Promise<AuthenticationResponse | undefined>
+  ) => Promise<AuthenticationResult | undefined>
+}
+
+export type AuthenticationResult = {
+  token: string
+  user: User
 }
