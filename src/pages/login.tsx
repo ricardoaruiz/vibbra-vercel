@@ -1,14 +1,15 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-import { Button } from 'components/Button'
-import { Input } from 'components/Input'
-import { Logo } from 'components/Logo'
+import { Button, Input, Logo } from 'components'
+import { useAuth, ServiceError, useLocalStorage } from 'service'
+import { AuthenticationResponse } from './api/authenticate/types'
 
 const schema = yup.object().shape({
-  user: yup.string().required('User is required'),
+  login: yup.string().required('User is required'),
   password: yup
     .string()
     .min(4, 'Password must be at least 4 characters long')
@@ -16,14 +17,17 @@ const schema = yup.object().shape({
 })
 
 type FormData = {
-  user: string
+  login: string
   password: string
 }
 
 import * as S from '../styles/login'
 
 export default function Login() {
-  const [user, setUser] = React.useState('')
+  const router = useRouter()
+  const { signin, signinSSO } = useAuth()
+  const { setToken } = useLocalStorage()
+  const [login, setLogin] = React.useState('')
   const [userError, setUserError] = React.useState('')
 
   const {
@@ -36,38 +40,63 @@ export default function Login() {
   })
 
   /**
+   * Handle login successfuly
+   */
+  const handleLoginSuccess = React.useCallback(
+    (response: AuthenticationResponse | undefined) => {
+      setToken(response?.token)
+      setLogin('')
+      reset()
+
+      router.push('/home')
+    },
+    [reset, router, setToken]
+  )
+
+  /**
    * Signin with user and password
    */
-  const signin = React.useCallback(
-    (data: FormData) => {
-      // TODO fazer o login
-      console.log('vai fazer o login com:', { data })
-
-      setUser('')
-      reset()
+  const handleSignin = React.useCallback(
+    async (data: FormData) => {
+      try {
+        const { login, password } = data
+        const response = await signin(login, password)
+        handleLoginSuccess(response)
+      } catch (error) {
+        // TODO tratar o erro
+        const serviceError = error as ServiceError
+        console.log('deu erro', serviceError)
+      }
     },
-    [reset]
+    [handleLoginSuccess, signin]
   )
 
   /**
    * SSO signin
    */
-  const signinSSO = React.useCallback(() => {
-    if (!user) {
-      setUserError('User is required')
-      return
+  const handleSigninSSO = React.useCallback(async () => {
+    try {
+      if (!login) {
+        setUserError('User is required')
+        return
+      }
+
+      // Passando o app_token fixo
+      const response = await signinSSO(login, `${login}AppToken1`)
+      handleLoginSuccess(response)
+    } catch (error) {
+      // TODO tratar o erro
+      const serviceError = error as ServiceError
+      console.log('deu erro', serviceError)
     }
+  }, [login, signinSSO, handleLoginSuccess])
 
-    // TODO fazer o login SSO
-    console.log(`vai fazer o login com: ${user} e ${user}AppToken1`)
-
-    setUser('')
-    reset()
-  }, [reset, user])
-
+  /**
+   *
+   */
   React.useEffect(() => {
-    user && setUserError('')
-  }, [user])
+    login && setUserError('')
+  }, [login])
 
   return (
     <S.Main>
@@ -75,19 +104,19 @@ export default function Login() {
         <Logo />
       </S.LeftSide>
       <S.RightSide>
-        <S.Form onSubmit={handleSubmit(signin)}>
+        <S.Form onSubmit={handleSubmit(handleSignin)}>
           <h2>Login</h2>
 
           <Input
             type="text"
-            id="user"
+            id="login"
             placeholder="User"
-            value={user}
-            {...register('user')}
+            value={login}
+            {...register('login')}
             onInput={(event) => {
-              setUser((event.target as HTMLInputElement).value)
+              setLogin((event.target as HTMLInputElement).value)
             }}
-            error={errors.user?.message || userError}
+            error={errors.login?.message || userError}
           />
           <Input
             type="password"
@@ -99,7 +128,7 @@ export default function Login() {
 
           <Button>Signin</Button>
 
-          <Button type="button" onClick={signinSSO}>
+          <Button type="button" onClick={handleSigninSSO}>
             Signin with SSO
           </Button>
         </S.Form>

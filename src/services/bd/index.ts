@@ -6,7 +6,7 @@ const users: UserBD[] = [
     name: 'Ricardo Ruiz',
     email: 'ricardo.almendro.ruiz@gmail.com',
     login: 'rruiz',
-    password: '123',
+    password: '1234',
     location: {
       lat: 123456.123456,
       lng: 654321.654321,
@@ -21,7 +21,7 @@ const users: UserBD[] = [
     name: 'Cinthya Carvalho',
     email: 'ccarvalho@gmail.com',
     login: 'ccarvalho',
-    password: '123',
+    password: '1234',
     location: {
       lat: 123456.123456,
       lng: 654321.654321,
@@ -36,7 +36,7 @@ const users: UserBD[] = [
     name: 'Guilherme Ruiz',
     email: 'gui@gmail.com',
     login: 'guiruiz',
-    password: '123',
+    password: '1234',
     location: {
       lat: 123456.123456,
       lng: 654321.654321,
@@ -51,7 +51,7 @@ const users: UserBD[] = [
     name: 'Haruko Nakamura',
     email: 'hnaka@gmail.com',
     login: 'hnaka',
-    password: '123',
+    password: '1234',
     location: {
       lat: 123456.123456,
       lng: 654321.654321,
