@@ -1,0 +1,345 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should render the heading 1`] = `
+.c2 {
+  width: 30rem;
+}
+
+.c3 {
+  fill: currentColor;
+}
+
+.c5 {
+  width: 2.4rem;
+  color: #030517;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #6be7fe;
+  box-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+}
+
+.c0 .c1 {
+  width: 10rem;
+  color: #FAFAFA;
+}
+
+.c0 .c4.menu_icon {
+  display: block;
+  width: 4.5rem;
+  color: #FAFAFA;
+  cursor: pointer;
+}
+
+.c6 {
+  position: fixed;
+  top: 9rem;
+  width: 80%;
+  height: 100vh;
+  background-color: #6be7fe;
+  box-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  left: -70rem;
+}
+
+.c9 {
+  display: none;
+}
+
+.c7 {
+  list-style: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 10rem;
+}
+
+.c8 {
+  margin-bottom: 2rem;
+}
+
+.c8 a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  font-size: 2.0rem;
+  color: #FAFAFA;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  margin-right: 1.5rem;
+  padding: 1rem;
+}
+
+.c8 a:hover {
+  color: #26AD9E;
+}
+
+.c8 .c4.menu_exit {
+  color: #FAFAFA;
+  width: 3rem;
+  cursor: pointer;
+}
+
+.c8 .c4.menu_exit:hover {
+  color: #26AD9E;
+}
+
+@media (min-width:768px) {
+  .c0 .c1 {
+    width: 12rem;
+  }
+}
+
+@media (min-width:768px) {
+  .c0 .c4.menu_icon {
+    display: none;
+  }
+}
+
+@media (min-width:768px) {
+  .c6 {
+    display: none;
+  }
+}
+
+@media (min-width:768px) {
+  .c9 {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-align-items: flex-end;
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+  }
+}
+
+@media (min-width:768px) {
+  .c7 {
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    margin-top: 0;
+  }
+}
+
+@media (min-width:768px) {
+  .c8 {
+    margin-bottom: unset;
+  }
+}
+
+<header
+  class="c0"
+>
+  <div
+    class="c1 c2"
+  >
+    <svg
+      class="c3"
+      viewBox="0 0 616.86 358.54"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title>
+        logo
+      </title>
+      <path
+        d="M271,447.5a13.79,13.79,0,0,1-13.8-13.79V327.33a13.79,13.79,0,1,1,27.58,0V433.71A13.78,13.78,0,0,1,271,447.5Z"
+        transform="translate(-112.52 -90.02)"
+      />
+      <path
+        d="M363.82,313.16A53.07,53.07,0,0,0,336.05,321V276a13.79,13.79,0,1,0-27.57,0v157.7a13.78,13.78,0,0,0,26.13,6.11,53,53,0,0,0,29.21,8.74c30.51,0,55.34-26,55.34-58.05V371.22C419.16,339.2,394.33,313.16,363.82,313.16Zm27.76,77.35c0,16.81-12.46,30.48-27.76,30.48a25.88,25.88,0,0,1-16-5.62,31.57,31.57,0,0,1-11.73-24.8V371.18c0-16.79,12.47-30.44,27.77-30.44s27.76,13.67,27.76,30.48Z"
+        transform="translate(-112.52 -90.02)"
+      />
+      <path
+        d="M416.91,151.74a53.07,53.07,0,0,0-27.72,7.83V115.14a13.79,13.79,0,0,0-27.58,0v157.7a13.78,13.78,0,0,0,26.33,5.7,52.88,52.88,0,0,0,29,8.6c30.51,0,55.34-26.05,55.34-58v-19.3C472.25,177.78,447.42,151.74,416.91,151.74Zm27.76,77.35c0,16.8-12.46,30.47-27.76,30.47a25.9,25.9,0,0,1-16-5.62,31.36,31.36,0,0,1-11.68-23.2V208.8c.48-16.35,12.71-29.48,27.72-29.48,15.3,0,27.76,13.66,27.76,30.47Z"
+        transform="translate(-112.52 -90.02)"
+      />
+      <path
+        d="M660.92,152.58a13.79,13.79,0,0,0-12.64,8.29,53,53,0,0,0-28.9-8.58c-30.52,0-55.35,26.05-55.35,58.06v19.29c0,32,24.83,58.05,55.35,58.05a53,53,0,0,0,29.2-8.73,13.78,13.78,0,0,0,26.13-6.12V166.37A13.78,13.78,0,0,0,660.92,152.58ZM635.4,254.51a25.87,25.87,0,0,1-16,5.61c-15.31,0-27.78-13.67-27.78-30.48V210.35c0-16.81,12.47-30.47,27.78-30.47s27.76,13.66,27.76,30.47v19.29A31.56,31.56,0,0,1,635.4,254.51Z"
+        transform="translate(-112.52 -90.02)"
+      />
+      <path
+        d="M559.15,165.58A13.85,13.85,0,0,0,544.5,152.7a68.77,68.77,0,0,0-26.78,7.71,13.78,13.78,0,0,0-26.25,5.86V272.84a13.79,13.79,0,1,0,27.58,0V203.57c0-20.66,24.43-23.13,27.28-23.35A13.8,13.8,0,0,0,559.15,165.58Z"
+        transform="translate(-112.52 -90.02)"
+      />
+      <path
+        d="M715.59,245.26a13.79,13.79,0,0,1-13.79-13.79V103.81a13.79,13.79,0,1,1,27.57,0V231.47A13.78,13.78,0,0,1,715.59,245.26Z"
+        transform="translate(-112.52 -90.02)"
+      />
+      <path
+        d="M715.59,293.34a13.8,13.8,0,0,1-13.79-13.79v-1.39a13.79,13.79,0,1,1,27.57,0v1.39A13.79,13.79,0,0,1,715.59,293.34Z"
+        transform="translate(-112.52 -90.02)"
+      />
+      <path
+        d="M178,447.5a13.8,13.8,0,0,1-13.17-9.67L113.15,272.51a13.79,13.79,0,0,1,26.32-8.24l38.29,122.4,36.73-122.25a13.8,13.8,0,0,1,13.2-9.82H269a13.8,13.8,0,0,1,0,27.59H238L191.23,437.68a13.79,13.79,0,0,1-13.12,9.82Z"
+        transform="translate(-112.52 -90.02)"
+      />
+    </svg>
+  </div>
+  <div
+    class="c4 c5 menu_icon"
+  >
+    <svg
+      class="h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 6h16M4 12h16M4 18h16"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+      />
+    </svg>
+  </div>
+  <nav
+    class="c6"
+  >
+    <ul
+      class="c7"
+    >
+      <li
+        class="c8"
+      >
+        <a
+          href="/"
+        >
+          Criar Negociações
+        </a>
+      </li>
+      <li
+        class="c8"
+      >
+        <a
+          href="/"
+        >
+          Minhas Negociações
+        </a>
+      </li>
+      <li
+        class="c8"
+      >
+        <a
+          href="/"
+        >
+          Meus Convites
+        </a>
+      </li>
+      <li
+        class="c8"
+      >
+        <div
+          class="c4 c5 menu_exit"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <nav
+    class="c9"
+  >
+    <ul
+      class="c7"
+    >
+      <li
+        class="c8"
+      >
+        <a
+          href="/"
+        >
+          Criar Negociações
+        </a>
+      </li>
+      <li
+        class="c8"
+      >
+        <a
+          href="/"
+        >
+          Minhas Negociações
+        </a>
+      </li>
+      <li
+        class="c8"
+      >
+        <a
+          href="/"
+        >
+          Meus Convites
+        </a>
+      </li>
+      <li
+        class="c8"
+      >
+        <div
+          class="c4 c5 menu_exit"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
+`

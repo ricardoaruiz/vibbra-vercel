@@ -9,11 +9,16 @@ const PRIVATE_KEY = 'chave-privada-para-geracao-do-jwt'
 
 /**
  *
+ */
+const TOKEN_LIFE_TIME = '10m'
+
+/**
+ *
  * @param data
  * @returns
  */
 export const generateJWT = (data: unknown): string => {
-  return jwt.sign({ data }, PRIVATE_KEY, { expiresIn: '20m' })
+  return jwt.sign({ data }, PRIVATE_KEY, { expiresIn: TOKEN_LIFE_TIME })
 }
 
 /**
@@ -22,8 +27,13 @@ export const generateJWT = (data: unknown): string => {
  * @param userId
  * @returns
  */
-export const validateJWT = (token: string, userId?: number): boolean => {
+export const validateJWT = (
+  token: string | undefined,
+  userId?: number
+): boolean => {
   try {
+    if (!token) return false
+
     const decode: any = jwt.verify(token, PRIVATE_KEY)
 
     const { id } = decode.data as TokenData

@@ -1,11 +1,13 @@
 import { AuthenticationResponse } from 'pages/api/authenticate/types'
 import { AuthenticationResult, UseAuthType } from './type'
 import { useApi } from '../useApi'
+import { useCookie } from 'hooks'
 
 const AUTH_BASE_URL = '/authenticate'
 
 export const useAuth = (): UseAuthType => {
   const { post } = useApi()
+  const { setToken, removeToken } = useCookie()
 
   /**
    * Perform basic login
@@ -21,6 +23,8 @@ export const useAuth = (): UseAuthType => {
       login,
       password
     })
+
+    setToken(resp?.data.token)
 
     return resp?.data
   }
@@ -40,8 +44,17 @@ export const useAuth = (): UseAuthType => {
       app_token: appToken
     })
 
+    setToken(resp?.data.token)
+
     return resp?.data
   }
 
-  return { signin, signinSSO }
+  /**
+   * Perform logoff
+   */
+  const signout = () => {
+    removeToken()
+  }
+
+  return { signin, signinSSO, signout }
 }

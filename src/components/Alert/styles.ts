@@ -33,7 +33,7 @@ const alertModifiers = {
 }
 
 export const Alert = styled.div<AlertStyledProps>`
-  ${({ theme, variant, show = false }) => css`
+  ${({ theme, variant = 'success', show = false }) => css`
     position: relative;
     color: ${theme.colors.white};
     padding: 1rem 2rem;

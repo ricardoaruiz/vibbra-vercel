@@ -1,7 +1,8 @@
+import React from 'react'
 import * as S from './styles'
 
-export const Logo = () => (
-  <S.Wrapper>
+export const Logo: React.VFC = () => (
+  <S.LogoContainer>
     <S.SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 616.86 358.54">
       <title>logo</title>
       <path
@@ -37,5 +38,5 @@ export const Logo = () => (
         transform="translate(-112.52 -90.02)"
       />
     </S.SVG>
-  </S.Wrapper>
+  </S.LogoContainer>
 )

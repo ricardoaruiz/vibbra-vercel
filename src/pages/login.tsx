@@ -5,8 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
 import { Alert, Button, Input, Logo } from 'components'
-import { useAuth, ServiceError, useLocalStorage } from 'service'
-import { AuthenticationResult } from 'service/useAuth/type'
+import { useAuth, ServiceError } from 'hooks'
 
 // Constante error messages from page
 const ERROR_MESSAGES = {
@@ -38,7 +37,6 @@ import * as S from '../styles/login'
 export default function Login() {
   const router = useRouter()
   const { signin, signinSSO } = useAuth()
-  const { setToken } = useLocalStorage()
 
   const [login, setLogin] = React.useState('')
   const [userError, setUserError] = React.useState('')
@@ -59,16 +57,12 @@ export default function Login() {
   /**
    * Handle login successfuly
    */
-  const handleLoginSuccess = React.useCallback(
-    (response: AuthenticationResult | undefined) => {
-      setToken(response?.token)
-      setLogin('')
-      reset()
+  const handleLoginSuccess = React.useCallback(() => {
+    setLogin('')
+    reset()
 
-      router.push('/home')
-    },
-    [reset, router, setToken]
-  )
+    router.push('/')
+  }, [reset, router])
 
   /**
    * Handle login error
@@ -100,8 +94,8 @@ export default function Login() {
       try {
         setIsLogging(true)
         const { login, password } = data
-        const response = await signin(login, password)
-        handleLoginSuccess(response)
+        await signin(login, password)
+        handleLoginSuccess()
       } catch (error) {
         handleLoginError(error)
       } finally {
@@ -124,8 +118,8 @@ export default function Login() {
       }
 
       setIsLoggingSSO(true)
-      const response = await signinSSO(login, `${login}AppToken1`)
-      handleLoginSuccess(response)
+      await signinSSO(login, `${login}AppToken1`)
+      handleLoginSuccess()
     } catch (error) {
       handleLoginError(error, true)
     } finally {

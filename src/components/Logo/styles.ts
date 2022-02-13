@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
+export const LogoContainer = styled.div`
   width: 30rem;
 `
 

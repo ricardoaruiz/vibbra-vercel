@@ -1,4 +1,4 @@
-import { User } from 'service/model/user'
+import { User } from 'hooks/model/user'
 
 export type UseAuthType = {
   /**
@@ -22,6 +22,11 @@ export type UseAuthType = {
     login: string,
     appToken: string
   ) => Promise<AuthenticationResult | undefined>
+
+  /**
+   * Perform logoff
+   */
+  signout: () => void
 }
 
 export type AuthenticationResult = {

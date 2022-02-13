@@ -1,4 +1,6 @@
+export * from './Template'
 export * from './Alert'
 export * from './Button'
 export * from './Input'
 export * from './Logo'
+export * from './icons'

@@ -1,8 +1,10 @@
-import type { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { TOKEN_KEY } from 'hooks'
 
 import { validateJWT } from 'services'
 
 export function middleware(req: NextRequest) {
+  // Intercept API request and verify token
   if (
     req.page.name?.includes('/api') &&
     !req.page.name?.includes('/authenticate')
@@ -22,6 +24,35 @@ export function middleware(req: NextRequest) {
       return new Response('Invalid or expired token', {
         status: 403
       })
+    }
+
+    return
+  }
+
+  /**
+   * Intercept server pages and verify token
+   */
+  if (
+    !req.page.name?.includes('/api') &&
+    !req.page.name?.startsWith('/login')
+  ) {
+    if (!validateJWT(req.cookies[TOKEN_KEY])) {
+      const url = req.nextUrl.clone()
+      url.pathname = '/login'
+      return NextResponse.redirect(url)
+    }
+
+    return
+  }
+
+  /**
+   * Intercept login page and verify token
+   */
+  if (req.page.name?.startsWith('/login')) {
+    if (validateJWT(req.cookies[TOKEN_KEY])) {
+      const url = req.nextUrl.clone()
+      url.pathname = '/'
+      return NextResponse.redirect(url)
     }
   }
 }

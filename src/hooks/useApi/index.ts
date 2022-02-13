@@ -1,14 +1,14 @@
 import React from 'react'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import { APIResponse, APIError, UseAPI } from './types'
-import { useLocalStorage } from 'service'
+import { useCookie } from 'hooks'
 
 const API = axios.create({
   baseURL: '/api'
 })
 
 export const useApi = (): UseAPI => {
-  const { getToken } = useLocalStorage()
+  const { getToken } = useCookie()
 
   React.useEffect(() => {
     API.interceptors.request.use((config: AxiosRequestConfig) => {

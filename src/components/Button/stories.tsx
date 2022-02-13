@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react'
-import Button from '.'
+import { Button } from '.'
 
 export default {
   title: 'Button',
