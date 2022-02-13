@@ -1,24 +1,16 @@
-export type InviteListResponse =
-  | { invite: Invite }[]
-  | string
-  | undefined
-  | null
+export type InviteListResponse = InviteResp[]
 
-export type InviteResponse = { invite: Invite } | string | undefined | null
+export type InviteResponse = InviteResp
 
 export type CreateInviteRequest = Invite
-export type CreateInviteResponse =
-  | { invite: Invite }
-  | string
-  | undefined
-  | null
+export type CreateInviteResponse = InviteResp
 
 export type UpdateInviteRequest = Invite
-export type UpdateInviteResponse =
-  | { invite: Invite }
-  | string
-  | undefined
-  | null
+export type UpdateInviteResponse = InviteResp
+
+export type InviteResp = {
+  invite: Invite
+}
 
 export type Invite = {
   name: string

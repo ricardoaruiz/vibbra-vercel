@@ -22,10 +22,12 @@ export const getUserInvites = (id: number) => {
     const invitedUser = bd.users.find((user) => user.id === invite.user_invited)
 
     return {
-      user_invited: invite.user_invited,
-      name: invitedUser?.name || 'Unknown',
-      email: invitedUser?.email || 'Unknown',
-      user: id
+      invite: {
+        user_invited: invite.user_invited,
+        name: invitedUser?.name || 'Unknown',
+        email: invitedUser?.email || 'Unknown',
+        user: id
+      }
     }
   })
 }

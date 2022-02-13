@@ -3,14 +3,14 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 import { Logo, CloseIcon, ExitIcon, MenuIcon } from 'components'
-import { useAuth } from 'hooks'
 import { MENU_ITEMS } from './constants'
+import { usePageContext } from 'context'
 
 import * as S from './styles'
 
 const Header = () => {
   const router = useRouter()
-  const { signout } = useAuth()
+  const { logoff } = usePageContext()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
   /**
@@ -34,9 +34,9 @@ const Header = () => {
    *
    */
   const handleSignoutClick = React.useCallback(() => {
-    signout()
+    logoff()
     router.push('/login')
-  }, [router, signout])
+  }, [router, logoff])
 
   /**
    *

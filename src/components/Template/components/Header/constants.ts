@@ -1,12 +1,12 @@
 export const MENU_ITEMS = [
   {
     id: 1,
-    href: '/',
+    href: '/negotiation',
     label: 'Criar Negociações'
   },
   {
     id: 2,
-    href: '/',
+    href: '/negotiation/list',
     label: 'Minhas Negociações'
   },
   {

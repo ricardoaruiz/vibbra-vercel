@@ -13,6 +13,21 @@ const PRIVATE_KEY = 'chave-privada-para-geracao-do-jwt'
 const TOKEN_LIFE_TIME = '10m'
 
 /**
+ * Open JWT and return data
+ * @param token
+ * @returns jwt data
+ */
+const openJWT = (token: string | undefined): TokenData | null => {
+  try {
+    if (!token) return null
+    const decode: any = jwt.verify(token, PRIVATE_KEY)
+    return decode.data as TokenData
+  } catch (error) {
+    return null
+  }
+}
+
+/**
  *
  * @param data
  * @returns
@@ -46,4 +61,30 @@ export const validateJWT = (
   } catch (error) {
     return false
   }
+}
+
+/**
+ * Get user id from token
+ * @param token
+ * @returns user id
+ */
+export const getUserIdFromtoken = (
+  token: string | undefined
+): number | null => {
+  if (!token) return null
+  const tokenData = openJWT(token)
+  return tokenData?.id || null
+}
+
+/**
+ * Get user name id from token
+ * @param token
+ * @returns user id
+ */
+export const getUserNameFromtoken = (
+  token: string | undefined
+): string | null => {
+  if (!token) return null
+  const tokenData = openJWT(token)
+  return tokenData?.name || null
 }

@@ -1,14 +1,14 @@
 import React from 'react'
-import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { APIResponse, APIError, UseAPI } from './types'
-import { useCookie } from 'hooks'
+import { useToken } from 'hooks'
 
 const API = axios.create({
   baseURL: '/api'
 })
 
 export const useApi = (): UseAPI => {
-  const { getToken } = useCookie()
+  const { getToken } = useToken()
 
   React.useEffect(() => {
     API.interceptors.request.use((config: AxiosRequestConfig) => {
@@ -27,6 +27,19 @@ export const useApi = (): UseAPI => {
 
   /**
    *
+   * @param response
+   * @returns
+   */
+  const buildAPIResponse = <T>(response: AxiosResponse) => {
+    return {
+      data: response.data,
+      status: response.status,
+      statusText: response.statusText
+    } as APIResponse<T>
+  }
+
+  /**
+   *
    * @param error
    */
   const handleError = (error: unknown) => {
@@ -39,7 +52,25 @@ export const useApi = (): UseAPI => {
   }
 
   /**
-   * Perform post requests on API
+   * Perform GET requests on API
+   */
+  const get = React.useCallback(
+    async <T>(
+      url: string,
+      config?: AxiosRequestConfig
+    ): Promise<APIResponse<T> | undefined> => {
+      try {
+        const response = await API.get<T>(url, config)
+        return buildAPIResponse(response)
+      } catch (error) {
+        handleError(error)
+      }
+    },
+    []
+  )
+
+  /**
+   * Perform POST requests on API
    */
   const post = React.useCallback(
     async <T>(
@@ -49,12 +80,7 @@ export const useApi = (): UseAPI => {
     ): Promise<APIResponse<T> | undefined> => {
       try {
         const response = await API.post<T>(url, body, config)
-
-        return {
-          data: response.data,
-          status: response.status,
-          statusText: response.statusText
-        } as APIResponse<T>
+        return buildAPIResponse(response)
       } catch (error) {
         handleError(error)
       }
@@ -62,5 +88,5 @@ export const useApi = (): UseAPI => {
     []
   )
 
-  return { post }
+  return { get, post }
 }

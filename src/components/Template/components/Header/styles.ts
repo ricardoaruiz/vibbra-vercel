@@ -99,6 +99,7 @@ export const MenuItem = styled.li`
       transition: all 0.3s;
       margin-right: 1.5rem;
       padding: 1rem;
+      cursor: pointer;
 
       &:hover {
         color: ${theme.colors.secondary};

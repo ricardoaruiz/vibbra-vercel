@@ -89,6 +89,7 @@ exports[`<Template /> should render the heading 1`] = `
   transition: all 0.3s;
   margin-right: 1.5rem;
   padding: 1rem;
+  cursor: pointer;
 }
 
 .c8 a:hover {

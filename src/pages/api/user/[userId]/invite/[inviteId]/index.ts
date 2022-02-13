@@ -8,7 +8,9 @@ import {
 
 export default (
   req: NextApiRequest,
-  res: NextApiResponse<InviteResponse | UpdateInviteResponse>
+  res: NextApiResponse<
+    InviteResponse | UpdateInviteResponse | string | undefined
+  >
 ) => {
   switch (req.method) {
     case 'GET':
@@ -30,7 +32,7 @@ export default (
  */
 const getUserInvite1 = (
   req: NextApiRequest,
-  res: NextApiResponse<InviteResponse>
+  res: NextApiResponse<InviteResponse | string | undefined>
 ) => {
   try {
     const { userId, inviteId } = req.query
@@ -50,7 +52,7 @@ const getUserInvite1 = (
  */
 const updateUserInvite = (
   req: NextApiRequest,
-  res: NextApiResponse<UpdateInviteResponse>
+  res: NextApiResponse<UpdateInviteResponse | string | undefined>
 ) => {
   try {
     const { userId, inviteId } = req.query

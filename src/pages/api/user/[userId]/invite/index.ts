@@ -10,7 +10,9 @@ import {
 
 export default (
   req: NextApiRequest,
-  res: NextApiResponse<InviteListResponse | CreateInviteResponse>
+  res: NextApiResponse<
+    InviteListResponse | CreateInviteResponse | string | undefined
+  >
 ) => {
   switch (req.method) {
     case 'GET':
@@ -33,14 +35,12 @@ export default (
  */
 const getInviteList = (
   req: NextApiRequest,
-  res: NextApiResponse<InviteListResponse>
+  res: NextApiResponse<InviteListResponse | string>
 ) => {
   try {
     const { userId } = req.query
     const invites = getUserInvites(+userId)
-    res
-      .status(200)
-      .json(invites?.length ? invites.map((invite) => ({ invite })) : [])
+    res.status(200).json(invites?.length ? invites.map((invite) => invite) : [])
   } catch (error) {
     res.status(500).json('Internal Error. Please try again later.')
   }
@@ -53,7 +53,7 @@ const getInviteList = (
  */
 const createInvite = (
   req: NextApiRequest,
-  res: NextApiResponse<CreateInviteResponse>
+  res: NextApiResponse<CreateInviteResponse | string | undefined>
 ) => {
   try {
     const { userId } = req.query
