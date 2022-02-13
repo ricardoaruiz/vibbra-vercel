@@ -3,7 +3,7 @@ import media from 'styled-media-query'
 import { Button } from 'components/Button/styles'
 import { Alert } from 'components/Alert/styles'
 
-import { Wrapper } from 'components/Logo/styles'
+import { LogoContainer } from 'components/Logo/styles'
 
 export const Main = styled.main`
   display: flex;
@@ -27,7 +27,7 @@ export const LeftSide = styled.section`
       width: 20rem;
     }
 
-    ${Wrapper} {
+    ${LogoContainer} {
       width: 20rem;
       color: ${theme.colors.primary};
 
