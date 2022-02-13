@@ -4,7 +4,7 @@ import { useApi } from '../useApi'
 import { InviteListResponse } from 'pages/api/user/[userId]/invite/types'
 import { InviteResult, UseUser } from './types'
 
-const USER_BASE_URL = '/user'
+const USER_BASE_URL = '/user1'
 
 export const useUser = (): UseUser => {
   const { get } = useApi()

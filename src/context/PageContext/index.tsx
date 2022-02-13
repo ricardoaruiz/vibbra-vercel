@@ -26,22 +26,22 @@ const PageContextProvider: React.FC = ({ children }) => {
     signout()
   }, [signout])
 
-  const setSuccessAlert = React.useCallback((message: string) => {
+  const showSuccessAlert = React.useCallback((message: string) => {
     setMessage(message)
     setMessageType('success')
   }, [])
 
-  const setWarningAlert = React.useCallback((message: string) => {
+  const showWarningAlert = React.useCallback((message: string) => {
     setMessage(message)
     setMessageType('warning')
   }, [])
 
-  const setErrorAlert = React.useCallback((message: string) => {
+  const showErrorAlert = React.useCallback((message: string) => {
     setMessage(message)
     setMessageType('error')
   }, [])
 
-  const closeAlert = React.useCallback(() => {
+  const hideAlert = React.useCallback(() => {
     setMessage('')
     setMessageType('success')
   }, [])
@@ -65,10 +65,10 @@ const PageContextProvider: React.FC = ({ children }) => {
   const contextValues = {
     userId,
     logoff,
-    setSuccessAlert,
-    setWarningAlert,
-    setErrorAlert,
-    closeAlert,
+    showSuccessAlert,
+    showWarningAlert,
+    showErrorAlert,
+    hideAlert,
     alert
   }
 

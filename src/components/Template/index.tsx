@@ -10,13 +10,13 @@ import { usePageContext } from 'context'
 import * as S from './styles'
 
 const Template: React.FC = ({ children }) => {
-  const { alert, closeAlert } = usePageContext()
+  const { alert, hideAlert } = usePageContext()
   const router = useRouter()
   const { getToken } = useToken()
 
   const handleCloseMessage = React.useCallback(() => {
-    closeAlert()
-  }, [closeAlert])
+    hideAlert()
+  }, [hideAlert])
 
   React.useEffect(() => {
     if (!validateJWT(getToken())) {

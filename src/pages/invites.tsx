@@ -6,7 +6,7 @@ import { InviteResult } from 'hooks/useUser/types'
 import { usePageContext } from 'context'
 
 const Invites = () => {
-  const { userId, setErrorAlert } = usePageContext()
+  const { userId, showErrorAlert } = usePageContext()
   const { getUserInvites } = useUser()
   const [invites, setInvites] = React.useState<InviteResult[]>([])
 
@@ -17,11 +17,11 @@ const Invites = () => {
         setInvites(invites || [])
       } catch (error) {
         const serviceError = error as ServiceError
-        setErrorAlert(serviceError.statusText)
+        showErrorAlert(serviceError.statusText)
       }
     }
     loadInvites()
-  }, [getUserInvites, setErrorAlert, userId])
+  }, [getUserInvites, showErrorAlert, userId])
 
   return (
     <Template>

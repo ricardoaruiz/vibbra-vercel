@@ -4,10 +4,10 @@ export type PageContextProviderType = {
   userId: number
   logoff: () => void
 
-  setSuccessAlert: (message: string) => void
-  setWarningAlert: (message: string) => void
-  setErrorAlert: (message: string) => void
-  closeAlert: () => void
+  showSuccessAlert: (message: string) => void
+  showWarningAlert: (message: string) => void
+  showErrorAlert: (message: string) => void
+  hideAlert: () => void
   alert: Alert | null
 }
 
