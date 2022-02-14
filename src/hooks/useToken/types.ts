@@ -2,5 +2,6 @@ export type UseToken = {
   setToken: (token: string | null | undefined) => void
   getToken: () => string | undefined
   removeToken: () => void
-  getUserIdFromToken: () => number | null
+  getUserIdFromToken: () => number
+  getUserNameFromToken: () => string
 }

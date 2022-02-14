@@ -14,10 +14,11 @@ PageContext.displayName = 'PageContext'
  * @returns
  */
 const PageContextProvider: React.FC = ({ children }) => {
-  const { getUserIdFromToken } = useToken()
+  const { getUserIdFromToken, getUserNameFromToken } = useToken()
   const { signout } = useAuth()
 
   const [userId, setUserId] = React.useState<number>(0)
+  const [userName, setUserName] = React.useState<string>('')
   const [message, setMessage] = React.useState('')
   const [messageType, setMessageType] = React.useState<AlertVariant>('success')
 
@@ -59,11 +60,18 @@ const PageContextProvider: React.FC = ({ children }) => {
 
   React.useEffect(() => {
     const userId = getUserIdFromToken()
-    !userId ? signout() : setUserId(userId)
-  }, [getUserIdFromToken, signout])
+    const userName = getUserNameFromToken()
+    if (!userId) {
+      signout()
+    } else {
+      setUserId(userId)
+      setUserName(userName)
+    }
+  }, [getUserIdFromToken, getUserNameFromToken, signout])
 
   const contextValues = {
     userId,
+    userName,
     logoff,
     showSuccessAlert,
     showWarningAlert,

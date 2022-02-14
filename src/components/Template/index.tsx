@@ -1,15 +1,17 @@
 import React from 'react'
-import { Header } from './components/Header'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { Header } from './components/Header'
 import { Alert } from 'components'
 import { useToken } from 'hooks'
 import { validateJWT } from 'services'
 import { usePageContext } from 'context'
+import { TemplateProps } from './types'
 
 import * as S from './styles'
 
-const Template: React.FC = ({ children }) => {
+const Template: React.FC<TemplateProps> = ({ children, urlBack, title }) => {
   const { alert, hideAlert } = usePageContext()
   const router = useRouter()
   const { getToken } = useToken()
@@ -34,6 +36,17 @@ const Template: React.FC = ({ children }) => {
           show={!!alert?.message}
           onClose={handleCloseMessage}
         />
+
+        <S.Back style={{ visibility: urlBack ? 'visible' : 'hidden' }}>
+          <Link href={urlBack || '/'}>
+            <a>{`< Voltar`}</a>
+          </Link>
+        </S.Back>
+
+        <S.Title style={{ visibility: title ? 'visible' : 'hidden' }}>
+          {title}
+        </S.Title>
+
         {children}
       </S.Content>
     </>

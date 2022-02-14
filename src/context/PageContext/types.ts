@@ -2,6 +2,7 @@ import { AlertVariant } from 'components/Alert/types'
 
 export type PageContextProviderType = {
   userId: number
+  userName: string
   logoff: () => void
 
   showSuccessAlert: (message: string) => void

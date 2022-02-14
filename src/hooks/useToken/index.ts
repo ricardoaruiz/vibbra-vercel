@@ -1,7 +1,7 @@
 import React from 'react'
 import { UseToken } from './types'
 import Cookies from 'js-cookie'
-import { getUserIdFromtoken } from 'services/jwt'
+import { getUserIdFromtoken, getUserNameFromtoken } from 'services/jwt'
 
 export const TOKEN_KEY = 'vibbra_token'
 
@@ -34,8 +34,22 @@ export const useToken = (): UseToken => {
    * @returns user id
    */
   const getUserIdFromToken = React.useCallback(() => {
-    return getUserIdFromtoken(getToken())
+    return getUserIdFromtoken(getToken()) || 0
   }, [getToken])
 
-  return { setToken, getToken, removeToken, getUserIdFromToken }
+  /**
+   * Get user id from token
+   * @returns user id
+   */
+  const getUserNameFromToken = React.useCallback(() => {
+    return getUserNameFromtoken(getToken()) || ''
+  }, [getToken])
+
+  return {
+    setToken,
+    getToken,
+    removeToken,
+    getUserIdFromToken,
+    getUserNameFromToken
+  }
 }

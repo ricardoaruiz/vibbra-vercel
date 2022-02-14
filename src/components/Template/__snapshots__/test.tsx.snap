@@ -45,6 +45,21 @@ exports[`<Template /> should render the heading 1`] = `
 }
 
 .c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   position: fixed;
   top: 9rem;
   width: 80%;
@@ -56,11 +71,18 @@ exports[`<Template /> should render the heading 1`] = `
   left: -70rem;
 }
 
-.c9 {
+.c10 {
   display: none;
 }
 
 .c7 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #FAFAFA;
+  margin: 5rem 0 0;
+}
+
+.c8 {
   list-style: none;
   display: -webkit-box;
   display: -webkit-flex;
@@ -73,14 +95,14 @@ exports[`<Template /> should render the heading 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-top: 10rem;
+  margin-top: 5rem;
 }
 
-.c8 {
+.c9 {
   margin-bottom: 2rem;
 }
 
-.c8 a {
+.c9 a {
   -webkit-text-decoration: none;
   text-decoration: none;
   font-size: 2.0rem;
@@ -92,17 +114,17 @@ exports[`<Template /> should render the heading 1`] = `
   cursor: pointer;
 }
 
-.c8 a:hover {
+.c9 a:hover {
   color: #26AD9E;
 }
 
-.c8 .c4.menu_exit {
+.c9 .c4.menu_exit {
   color: #FAFAFA;
   width: 3rem;
   cursor: pointer;
 }
 
-.c8 .c4.menu_exit:hover {
+.c9 .c4.menu_exit:hover {
   color: #26AD9E;
 }
 
@@ -125,7 +147,7 @@ exports[`<Template /> should render the heading 1`] = `
 }
 
 @media (min-width:768px) {
-  .c9 {
+  .c10 {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
@@ -133,6 +155,9 @@ exports[`<Template /> should render the heading 1`] = `
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
     -webkit-box-pack: end;
     -webkit-justify-content: flex-end;
     -ms-flex-pack: end;
@@ -149,6 +174,13 @@ exports[`<Template /> should render the heading 1`] = `
 
 @media (min-width:768px) {
   .c7 {
+    margin: 0 0 auto;
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width:768px) {
+  .c8 {
     -webkit-flex-direction: row;
     -ms-flex-direction: row;
     flex-direction: row;
@@ -157,7 +189,7 @@ exports[`<Template /> should render the heading 1`] = `
 }
 
 @media (min-width:768px) {
-  .c8 {
+  .c9 {
     margin-bottom: unset;
   }
 }
@@ -235,32 +267,35 @@ exports[`<Template /> should render the heading 1`] = `
   <nav
     class="c6"
   >
-    <ul
+    <p
       class="c7"
+    />
+    <ul
+      class="c8"
     >
       <li
-        class="c8"
+        class="c9"
       >
         <a>
-          Criar Negociações
+          New Negotiation
         </a>
       </li>
       <li
-        class="c8"
+        class="c9"
       >
         <a>
-          Minhas Negociações
+          My Negotiations
         </a>
       </li>
       <li
-        class="c8"
+        class="c9"
       >
         <a>
-          Meus Convites
+          My Invites
         </a>
       </li>
       <li
-        class="c8"
+        class="c9"
       >
         <div
           class="c4 c5 menu_exit"
@@ -284,34 +319,37 @@ exports[`<Template /> should render the heading 1`] = `
     </ul>
   </nav>
   <nav
-    class="c9"
+    class="c10"
   >
-    <ul
+    <p
       class="c7"
+    />
+    <ul
+      class="c8"
     >
       <li
-        class="c8"
+        class="c9"
       >
         <a>
-          Criar Negociações
+          New Negotiation
         </a>
       </li>
       <li
-        class="c8"
+        class="c9"
       >
         <a>
-          Minhas Negociações
+          My Negotiations
         </a>
       </li>
       <li
-        class="c8"
+        class="c9"
       >
         <a>
-          Meus Convites
+          My Invites
         </a>
       </li>
       <li
-        class="c8"
+        class="c9"
       >
         <div
           class="c4 c5 menu_exit"

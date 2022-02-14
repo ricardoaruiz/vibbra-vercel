@@ -1,9 +1,13 @@
 import React from 'react'
 
-import { Template } from 'components'
+import { PlusIcon, Template } from 'components'
 import { ServiceError, useUser } from 'hooks'
 import { InviteResult } from 'hooks/useUser/types'
 import { usePageContext } from 'context'
+import { EditIcon, TrashIcon, Button } from 'components'
+
+import * as S from '../../styles/invites'
+import Link from 'next/link'
 
 const Invites = () => {
   const { userId, showErrorAlert } = usePageContext()
@@ -20,16 +24,31 @@ const Invites = () => {
         showErrorAlert(serviceError.statusText)
       }
     }
-    loadInvites()
+    if (userId) {
+      loadInvites()
+    }
   }, [getUserInvites, showErrorAlert, userId])
 
   return (
-    <Template>
-      <ul>
-        {invites.map((item, index) => (
-          <li key={index}>{item.invite.name}</li>
+    <Template title="Invites">
+      <S.List>
+        <Link href="/invites/create" passHref>
+          <Button>
+            <PlusIcon />
+            Create
+          </Button>
+        </Link>
+
+        {invites.map((item) => (
+          <S.ListItem key={`${item.invite.user}_${item.invite.user_invited}`}>
+            {item.invite.name}
+            <S.Actions>
+              <EditIcon />
+              <TrashIcon />
+            </S.Actions>
+          </S.ListItem>
         ))}
-      </ul>
+      </S.List>
     </Template>
   )
 }

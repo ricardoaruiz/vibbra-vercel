@@ -47,6 +47,11 @@ const mobileNavMofiers = {
 
 export const MobileNav = styled.nav<{ isOpened?: boolean }>`
   ${({ theme, isOpened = false }) => css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
     position: fixed;
     top: 9rem;
     width: 80%;
@@ -67,12 +72,27 @@ export const DesktopNav = styled.nav`
   display: none;
 
   ${media.greaterThan('medium')`
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    align-self: stretch;
-  `}
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      align-self: stretch;
+    `}
+`
+
+export const LoggedUser = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.xxlarge};
+    font-weight: ${theme.font.bold};
+    color: ${theme.colors.white};
+    margin: 5rem 0 0;
+
+    ${media.greaterThan('medium')`
+      margin: 0 0 auto;
+      font-size: ${theme.font.sizes.medium};
+    `}
+  `};
 `
 
 export const Menu = styled.ul`
@@ -80,7 +100,7 @@ export const Menu = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10rem;
+  margin-top: 5rem;
 
   ${media.greaterThan('medium')`
     flex-direction: row;

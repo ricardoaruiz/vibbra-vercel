@@ -10,7 +10,7 @@ import * as S from './styles'
 
 const Header = () => {
   const router = useRouter()
-  const { logoff } = usePageContext()
+  const { logoff, userName } = usePageContext()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
 
   /**
@@ -61,21 +61,24 @@ const Header = () => {
   const renderMenu = React.useCallback(
     (isMobile = true) => {
       return (
-        <S.Menu>
-          {MENU_ITEMS.map(({ id, href, label }) => (
-            <S.MenuItem key={id}>
-              {/* <Link href={href}> */}
-              <a onClick={() => handleItemMenuClick(href, isMobile)}>{label}</a>
-              {/* </Link> */}
+        <>
+          <S.LoggedUser>{userName}</S.LoggedUser>
+          <S.Menu>
+            {MENU_ITEMS.map(({ id, href, label }) => (
+              <S.MenuItem key={id}>
+                <a onClick={() => handleItemMenuClick(href, isMobile)}>
+                  {label}
+                </a>
+              </S.MenuItem>
+            ))}
+            <S.MenuItem>
+              <ExitIcon className="menu_exit" onClick={handleSignoutClick} />
             </S.MenuItem>
-          ))}
-          <S.MenuItem>
-            <ExitIcon className="menu_exit" onClick={handleSignoutClick} />
-          </S.MenuItem>
-        </S.Menu>
+          </S.Menu>
+        </>
       )
     },
-    [handleItemMenuClick, handleSignoutClick]
+    [handleItemMenuClick, handleSignoutClick, userName]
   )
 
   return (

@@ -2,11 +2,7 @@ import React from 'react'
 import { Template } from 'components'
 
 const NegotiationList = () => {
-  return (
-    <Template>
-      <div>My Negotiations</div>
-    </Template>
-  )
+  return <Template title="My Negotiations"></Template>
 }
 
 export default NegotiationList

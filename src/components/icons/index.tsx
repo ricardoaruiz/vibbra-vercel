@@ -1,3 +1,6 @@
 export * from './MenuIcon'
 export * from './ExitIcon'
 export * from './CloseIcon'
+export * from './EditIcon'
+export * from './TrashIcon'
+export * from './PlusIcon'
