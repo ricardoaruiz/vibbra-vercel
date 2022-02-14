@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PlusIcon, Template } from 'components'
+import { ConfirmModal, PlusIcon, Template } from 'components'
 import { ServiceError, useUser } from 'hooks'
 import { InviteResult } from 'hooks/useUser/types'
 import { usePageContext } from 'context'
@@ -13,6 +13,11 @@ const Invites = () => {
   const { userId, showErrorAlert } = usePageContext()
   const { getUserInvites } = useUser()
   const [invites, setInvites] = React.useState<InviteResult[]>([])
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false)
+
+  const handleConfirmDelete = React.useCallback(() => {
+    setIsOpenDeleteModal(false)
+  }, [])
 
   React.useEffect(() => {
     const loadInvites = async () => {
@@ -44,11 +49,22 @@ const Invites = () => {
             {item.invite.name}
             <S.Actions>
               <EditIcon />
-              <TrashIcon />
+              <TrashIcon
+                onClick={() => {
+                  setIsOpenDeleteModal(true)
+                }}
+              />
             </S.Actions>
           </S.ListItem>
         ))}
       </S.List>
+
+      <ConfirmModal
+        open={isOpenDeleteModal}
+        message="Do you really want to remove the invite?"
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setIsOpenDeleteModal(false)}
+      />
     </Template>
   )
 }
