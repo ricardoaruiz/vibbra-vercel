@@ -2,15 +2,15 @@
 
 exports[`<Alert /> should render the heading 1`] = `
 .c0 {
-  position: relative;
+  position: fixed;
+  left: 0;
+  width: 100%;
   color: #FAFAFA;
   padding: 1rem 2rem;
-  width: 100%;
-  border-radius: 0.4rem;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   background-color: #0cac21;
-  top: -20px;
+  bottom: -20px;
   opacity: 0;
   visibility: hidden;
 }

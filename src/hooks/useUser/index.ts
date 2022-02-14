@@ -1,13 +1,32 @@
 import React from 'react'
 
 import { useApi } from '../useApi'
-import { InviteListResponse } from 'pages/api/user/[userId]/invite/types'
-import { InviteResult, UseUser } from './types'
+import {
+  CreateInviteResponse,
+  InviteListResponse
+} from 'pages/api/user/[userId]/invite/types'
+import {
+  CreateUserInviteParams,
+  GetSimpleUsersResult,
+  InviteResult,
+  UseUser
+} from './types'
+import { GetUsersResponse } from 'pages/api/user/types'
 
 const USER_BASE_URL = '/user'
 
 export const useUser = (): UseUser => {
-  const { get } = useApi()
+  const { get, post } = useApi()
+
+  /**
+   *
+   */
+  const getSimpleUsers = React.useCallback(async (): Promise<
+    GetSimpleUsersResult | undefined
+  > => {
+    const response = await get<GetUsersResponse>(USER_BASE_URL)
+    return response?.data
+  }, [get])
 
   /**
    *
@@ -22,5 +41,21 @@ export const useUser = (): UseUser => {
     [get]
   )
 
-  return { getUserInvites }
+  /**
+   *
+   */
+  const createUserInvite = React.useCallback(
+    async (
+      params: CreateUserInviteParams
+    ): Promise<InviteResult | undefined> => {
+      const response = await post<CreateInviteResponse>(
+        `${USER_BASE_URL}/${params.user}/invite`,
+        { ...params }
+      )
+      return response?.data
+    },
+    [post]
+  )
+
+  return { createUserInvite, getSimpleUsers, getUserInvites }
 }

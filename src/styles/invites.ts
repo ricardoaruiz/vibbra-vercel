@@ -10,9 +10,6 @@ export const List = styled.ul`
     margin-top: ${theme.spacings.large};
 
     ${Button} {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       margin-bottom: 1rem;
       align-self: flex-end;
       padding: 0.5rem 1rem;

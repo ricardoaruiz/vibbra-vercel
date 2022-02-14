@@ -10,7 +10,7 @@ type UserAppToken = {
 /**
  *
  * @param user
- * @returns
+ * @returns complete user
  */
 const buildUser = (user: UserBD | undefined): User | undefined => {
   if (!user) return undefined
@@ -33,6 +33,34 @@ const buildUser = (user: UserBD | undefined): User | undefined => {
       zip_code
     }
   } as User
+}
+
+/**
+ *
+ * @param user
+ * @returns simple user
+ */
+const buildSimpleUser = (user: UserBD | undefined): User | undefined => {
+  if (!user) return undefined
+
+  const { id, name, email, login } = user
+
+  return {
+    id,
+    name,
+    email,
+    login
+  } as User
+}
+
+/**
+ * Get all users
+ * @returns array of user
+ */
+export const getSimpleUsers = () => {
+  return bd.users
+    .map((user) => buildSimpleUser(user))
+    .filter((user: User | undefined) => user !== undefined) as User[]
 }
 
 /**

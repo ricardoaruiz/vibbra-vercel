@@ -1,6 +1,7 @@
 export { getNextId } from './bd/bd-service'
 export { validateJWT, generateJWT } from './jwt'
 export {
+  getSimpleUsers,
   findUserById,
   findUserByLoginAndPassword,
   findUserByLoginAndAppToken
@@ -10,5 +11,6 @@ export {
   updateInvite,
   getAllInvites,
   getUserInvite,
-  getUserInvites
+  getUserInvites,
+  getUserInviteByInvitedUser
 } from './invite'

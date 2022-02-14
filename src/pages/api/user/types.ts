@@ -1,13 +1,15 @@
-export type User = {
+export type GetUsersResponse = UserResponse[]
+
+export type UserResponse = {
   id: number
   name: string
   email: string
   login: string
   password?: string
-  location?: Location
+  location?: LocationResponse
 }
 
-type Location = {
+type LocationResponse = {
   lat: number
   lng: number
   address: string

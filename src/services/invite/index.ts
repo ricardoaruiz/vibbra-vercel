@@ -45,18 +45,54 @@ export const getUserInvite = (userId: number, inviteId: number) => {
   const userInvite = bd.invites.find(
     (invite) => invite.user === userId && invite.id === inviteId
   )
+
   if (!userInvite) return null
 
   const invitedUser = bd.users.find(
     (user) => user.id === userInvite.user_invited
   )
 
-  return {
-    user_invited: invitedUser?.id || 0,
-    name: invitedUser?.name || 'Unknown',
-    email: invitedUser?.email || 'Unknown',
-    user: userId
-  }
+  return invitedUser
+    ? {
+        user_invited: invitedUser.id,
+        name: invitedUser.name,
+        email: invitedUser.email,
+        user: userId
+      }
+    : null
+}
+
+/**
+ *
+ * @param userId
+ * @param userInvitedId
+ * @returns
+ */
+export const getUserInviteByInvitedUser = (
+  userId: number,
+  userInvitedId: number
+) => {
+  const foundUser = bd.users.find((user) => user.id === userId)
+  if (!foundUser) return null
+
+  const userInvites = bd.invites.filter(
+    (invite) => invite.user === userId && invite.user_invited === userInvitedId
+  )
+
+  if (!userInvites.length) return null
+
+  const invitedUser = bd.users.find(
+    (user) => user.id === userInvites[0].user_invited
+  )
+
+  return invitedUser
+    ? {
+        user_invited: invitedUser.id,
+        name: invitedUser.name,
+        email: invitedUser.email,
+        user: userId
+      }
+    : null
 }
 
 /**

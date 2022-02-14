@@ -4,8 +4,8 @@ import { InputProps } from './types'
 
 import * as S from './styles'
 
-const Input: React.VFC<InputProps> = React.forwardRef(
-  ({ error, ...rest }, ref: React.Ref<HTMLInputElement>) => (
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ error, ...rest }, ref) => (
     <S.Wrapper>
       <S.InternalInput type="text" {...rest} error={error} ref={ref} />
       {error && <S.Error>{error}</S.Error>}

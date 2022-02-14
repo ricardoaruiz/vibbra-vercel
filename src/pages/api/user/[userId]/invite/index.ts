@@ -1,6 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { addInvite, findUserById, getUserInvites, getNextId } from 'services'
+import {
+  addInvite,
+  findUserById,
+  getUserInvites,
+  getNextId,
+  getUserInviteByInvitedUser
+} from 'services'
 
 import {
   CreateInviteRequest,
@@ -61,6 +67,14 @@ const createInvite = (
 
     if (!name || !email || !user || !user_invited) {
       return res.status(400).send(undefined)
+    }
+
+    if (+userId === user_invited) {
+      return res.status(422).send("Can't invite yourself")
+    }
+
+    if (getUserInviteByInvitedUser(+userId, user_invited)) {
+      return res.status(422).send('This user has already been invited')
     }
 
     if (findUserById(+user_invited)) {

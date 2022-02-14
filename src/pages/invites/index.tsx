@@ -30,7 +30,7 @@ const Invites = () => {
   }, [getUserInvites, showErrorAlert, userId])
 
   return (
-    <Template title="Invites">
+    <Template title="My Invites">
       <S.List>
         <Link href="/invites/create" passHref>
           <Button>

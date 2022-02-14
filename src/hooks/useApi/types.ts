@@ -28,4 +28,5 @@ export type APIResponse<T> = {
 export type APIError = {
   status: string
   statusText: string
+  message: string
 }

@@ -21,12 +21,12 @@ const alertModifiers = {
     `};
   `,
   visible: css`
-    top: 0;
+    bottom: 0;
     opacity: 1;
     visibility: visible;
   `,
   invisible: css`
-    top: -20px;
+    bottom: -20px;
     opacity: 0;
     visibility: hidden;
   `
@@ -34,11 +34,11 @@ const alertModifiers = {
 
 export const Alert = styled.div<AlertStyledProps>`
   ${({ theme, variant = 'success', show = false }) => css`
-    position: relative;
+    position: fixed;
+    left: 0;
+    width: 100%;
     color: ${theme.colors.white};
     padding: 1rem 2rem;
-    width: 100%;
-    border-radius: ${theme.border.radius};
     transition: all 0.3s;
 
     ${alertModifiers[variant]}

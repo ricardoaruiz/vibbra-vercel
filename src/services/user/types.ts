@@ -3,8 +3,8 @@ export type User = {
   name: string
   email: string
   login: string
-  password: string
-  location: Location
+  password?: string
+  location?: Location
 }
 
 type Location = {

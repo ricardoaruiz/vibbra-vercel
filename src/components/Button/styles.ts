@@ -3,6 +3,10 @@ import { darken, lighten } from 'polished'
 
 export const Button = styled.button`
   ${({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     border: none;
     border-radius: 0.5rem;
     padding: 1rem 0.5rem;

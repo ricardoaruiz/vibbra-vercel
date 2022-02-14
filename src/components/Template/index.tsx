@@ -29,14 +29,8 @@ const Template: React.FC<TemplateProps> = ({ children, urlBack, title }) => {
   return (
     <>
       <Header />
-      <S.Content>
-        <Alert
-          message={alert?.message}
-          variant={alert?.type}
-          show={!!alert?.message}
-          onClose={handleCloseMessage}
-        />
 
+      <S.Content>
         <S.Back style={{ visibility: urlBack ? 'visible' : 'hidden' }}>
           <Link href={urlBack || '/'}>
             <a>{`< Voltar`}</a>
@@ -49,6 +43,13 @@ const Template: React.FC<TemplateProps> = ({ children, urlBack, title }) => {
 
         {children}
       </S.Content>
+
+      <Alert
+        message={alert?.message}
+        variant={alert?.type}
+        show={!!alert?.message}
+        onClose={handleCloseMessage}
+      />
     </>
   )
 }

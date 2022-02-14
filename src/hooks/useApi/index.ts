@@ -44,10 +44,10 @@ export const useApi = (): UseAPI => {
    */
   const handleError = (error: unknown) => {
     const axiosError = error as AxiosError
-
     throw {
       status: axiosError.response?.status || '500',
-      statusText: axiosError.response?.statusText || 'Internal Server Error'
+      statusText: axiosError.response?.statusText || 'Internal Server Error',
+      message: axiosError.response?.data
     } as APIError
   }
 
