@@ -4,10 +4,12 @@ import { TOKEN_KEY } from 'hooks'
 import { validateJWT } from 'services'
 
 export function middleware(req: NextRequest) {
+  if (!req.page.name) return
+
   // Intercept API request and verify token
   if (
-    req.page.name?.includes('/api') &&
-    !req.page.name?.includes('/authenticate')
+    req.page.name?.startsWith('/api') &&
+    !req.page.name?.startsWith('/api/authenticate')
   ) {
     const authorization = req.headers.get('authorization')
     const userId = req.page.name?.includes('[userId]')
@@ -33,7 +35,7 @@ export function middleware(req: NextRequest) {
    * Intercept server pages and verify token
    */
   if (
-    !req.page.name?.includes('/api') &&
+    !req.page.name?.startsWith('/api') &&
     !req.page.name?.startsWith('/login')
   ) {
     if (!validateJWT(req.cookies[TOKEN_KEY])) {
@@ -48,11 +50,18 @@ export function middleware(req: NextRequest) {
   /**
    * Intercept login page and verify token
    */
-  if (req.page.name?.startsWith('/login')) {
+  if (
+    !req.page.name?.startsWith('/api') &&
+    req.page.name?.startsWith('/login')
+  ) {
     if (validateJWT(req.cookies[TOKEN_KEY])) {
       const url = req.nextUrl.clone()
       url.pathname = '/'
       return NextResponse.redirect(url)
     }
+
+    return
   }
+
+  return
 }
