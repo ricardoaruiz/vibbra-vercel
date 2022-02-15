@@ -88,5 +88,23 @@ export const useApi = (): UseAPI => {
     []
   )
 
-  return { get, post }
+  /**
+   * Perform DELETE requests on API
+   */
+  const del = React.useCallback(
+    async <T>(
+      url: string,
+      config?: AxiosRequestConfig
+    ): Promise<APIResponse<T> | undefined> => {
+      try {
+        const response = await API.delete<T>(url, config)
+        return buildAPIResponse(response)
+      } catch (error) {
+        handleError(error)
+      }
+    },
+    []
+  )
+
+  return { get, post, del }
 }

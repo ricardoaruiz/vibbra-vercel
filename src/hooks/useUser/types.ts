@@ -6,6 +6,10 @@ export type UseUser = {
   ) => Promise<InviteResult | undefined>
   getUserInvites: (userId: number) => Promise<InviteResult[] | undefined>
   getSimpleUsers: () => Promise<GetSimpleUsersResult | undefined>
+  removeUserInvite: (
+    userId: number,
+    invitedUserId: number
+  ) => Promise<void | undefined>
 }
 
 export type GetSimpleUsersResult = User[]

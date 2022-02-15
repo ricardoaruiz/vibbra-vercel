@@ -6,4 +6,14 @@ export default {
   component: ConfirmModal
 } as Meta
 
-export const Default: Story = () => <ConfirmModal />
+export const Default: Story = () => (
+  <ConfirmModal
+    message={''}
+    onConfirm={function (): void {
+      throw new Error('Function not implemented.')
+    }}
+    onCancel={function (): void {
+      throw new Error('Function not implemented.')
+    }}
+  />
+)

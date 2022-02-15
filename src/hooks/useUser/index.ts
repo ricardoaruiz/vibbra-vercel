@@ -16,7 +16,7 @@ import { GetUsersResponse } from 'pages/api/user/types'
 const USER_BASE_URL = '/user'
 
 export const useUser = (): UseUser => {
-  const { get, post } = useApi()
+  const { get, post, del } = useApi()
 
   /**
    *
@@ -57,5 +57,19 @@ export const useUser = (): UseUser => {
     [post]
   )
 
-  return { createUserInvite, getSimpleUsers, getUserInvites }
+  /**
+   *
+   */
+  const removeUserInvite = React.useCallback(
+    async (
+      userId: number,
+      invitedUserId: number
+    ): Promise<void | undefined> => {
+      await del(`${USER_BASE_URL}/${userId}/invite/${invitedUserId}`)
+      return
+    },
+    [del]
+  )
+
+  return { createUserInvite, getSimpleUsers, getUserInvites, removeUserInvite }
 }

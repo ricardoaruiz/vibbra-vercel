@@ -13,7 +13,7 @@ const ConfirmModal: React.VFC<ConfirmModalProps> = ({
 }) => (
   <>
     <S.ConfirmModalOverlay open={open}>
-      <S.ConfirmModalWindow>
+      <S.ConfirmModalWindow open={open}>
         <S.Message>{message}</S.Message>
 
         <S.Actions>

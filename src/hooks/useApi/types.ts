@@ -17,6 +17,14 @@ export type UseAPI = {
     body: unknown,
     config?: AxiosRequestConfig
   ) => Promise<APIResponse<T> | undefined>
+
+  /**
+   * Perform DELETE requests
+   */
+  del: <T>(
+    url: string,
+    config?: AxiosRequestConfig
+  ) => Promise<APIResponse<T> | undefined>
 }
 
 export type APIResponse<T> = {

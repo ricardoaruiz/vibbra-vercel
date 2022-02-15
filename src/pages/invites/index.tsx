@@ -11,14 +11,53 @@ import Link from 'next/link'
 
 const Invites = () => {
   const { userId, showErrorAlert } = usePageContext()
-  const { getUserInvites } = useUser()
+  const { getUserInvites, removeUserInvite } = useUser()
   const [invites, setInvites] = React.useState<InviteResult[]>([])
   const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false)
+  const [selectedInvite, setSelectedInvite] = React.useState<InviteResult>()
 
-  const handleConfirmDelete = React.useCallback(() => {
+  /**
+   *
+   */
+  const handleDeleteClick = React.useCallback((item: InviteResult) => {
+    setSelectedInvite(item)
+    setIsOpenDeleteModal(true)
+  }, [])
+
+  /**
+   *
+   */
+  const handleConfirmDeleteClick = React.useCallback(async () => {
+    try {
+      selectedInvite &&
+        (await removeUserInvite(userId, selectedInvite.invite.user_invited))
+
+      setInvites((state) =>
+        state.filter(
+          (item) =>
+            item.invite.user_invited != selectedInvite?.invite.user_invited
+        )
+      )
+
+      setSelectedInvite(undefined)
+      setIsOpenDeleteModal(false)
+    } catch (error) {
+      const serviceError = error as ServiceError
+      showErrorAlert(serviceError.statusText)
+    }
+  }, [removeUserInvite, selectedInvite, showErrorAlert, userId])
+
+  /**
+   *
+   */
+  const handleCancelDeleteClick = React.useCallback(() => {
+    setSelectedInvite(undefined)
     setIsOpenDeleteModal(false)
   }, [])
 
+  /**
+   *
+   */
   React.useEffect(() => {
     const loadInvites = async () => {
       try {
@@ -49,11 +88,7 @@ const Invites = () => {
             {item.invite.name}
             <S.Actions>
               <EditIcon />
-              <TrashIcon
-                onClick={() => {
-                  setIsOpenDeleteModal(true)
-                }}
-              />
+              <TrashIcon onClick={() => handleDeleteClick(item)} />
             </S.Actions>
           </S.ListItem>
         ))}
@@ -62,8 +97,8 @@ const Invites = () => {
       <ConfirmModal
         open={isOpenDeleteModal}
         message="Do you really want to remove the invite?"
-        onConfirm={handleConfirmDelete}
-        onCancel={() => setIsOpenDeleteModal(false)}
+        onConfirm={handleConfirmDeleteClick}
+        onCancel={handleCancelDeleteClick}
       />
     </Template>
   )

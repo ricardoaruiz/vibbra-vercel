@@ -1,5 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getUserInvite, updateInvite } from 'services'
+import {
+  getUserInvite,
+  updateInvite,
+  removeUserInvite as removeUserIvt,
+  getUserInviteByInvitedUser
+} from 'services'
 import {
   InviteResponse,
   UpdateInviteRequest,
@@ -18,6 +23,9 @@ export default (
       break
     case 'PUT':
       updateUserInvite(req, res)
+      break
+    case 'DELETE':
+      removeUserInvite(req, res)
       break
     default:
       res.status(405).send(undefined)
@@ -70,6 +78,31 @@ const updateUserInvite = (
       })
       res.status(201).send({ invite: { name, email, user, user_invited } })
     }
+  } catch (error) {
+    res.status(500).json('Internal Error. Please try again later.')
+  }
+}
+
+/**
+ *
+ * @param req
+ * @param res
+ * @returns
+ */
+const removeUserInvite = (
+  req: NextApiRequest,
+  res: NextApiResponse<string | undefined>
+) => {
+  try {
+    const { userId, inviteId } = req.query
+
+    const userInviteToRemove = getUserInviteByInvitedUser(+userId, +inviteId)
+    if (!userInviteToRemove) {
+      return res.status(208).send('')
+    }
+
+    removeUserIvt(+userId, +inviteId)
+    res.status(204).send('')
   } catch (error) {
     res.status(500).json('Internal Error. Please try again later.')
   }

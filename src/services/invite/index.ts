@@ -116,3 +116,15 @@ export const updateInvite = (invite: Invite) => {
       : currentInvite
   })
 }
+
+/**
+ *
+ * @param userId
+ * @param invitedUserId
+ */
+export const removeUserInvite = (userId: number, invitedUserId: number) => {
+  const inviteToRemove = bd.invites.find(
+    (invite) => invite.user === userId && invite.user_invited === invitedUserId
+  )
+  bd.invites = bd.invites.filter((invite) => invite.id !== inviteToRemove?.id)
+}

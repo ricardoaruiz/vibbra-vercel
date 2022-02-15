@@ -7,23 +7,30 @@ type ConfirmModalOverlayProps = Pick<ConfirmModalProps, 'open'>
 
 const confirmModalOverlayModifiers = {
   open: css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
   `,
   close: css`
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
   `
 }
 
 export const ConfirmModalOverlay = styled.div<ConfirmModalOverlayProps>`
   ${({ open = false }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
 
     ${open
       ? confirmModalOverlayModifiers.open
@@ -31,26 +38,45 @@ export const ConfirmModalOverlay = styled.div<ConfirmModalOverlayProps>`
   `};
 `
 
-export const ConfirmModalWindow = styled.div`
-  ${({ theme }) => css`
+type ConfirmModalWindowProps = Pick<ConfirmModalProps, 'open'>
+
+const confirmModalWindowModifiers = {
+  open: css`
+    bottom: 0px;
+  `,
+  close: css`
+    bottom: -500px;
+
+    ${media.greaterThan('medium')`
+      bottom: 500px;
+    `}
+  `
+}
+
+export const ConfirmModalWindow = styled.div<ConfirmModalWindowProps>`
+  ${({ theme, open = false }) => css`
     display: flex;
     flex-direction: column;
     align-items: center;
 
     position: absolute;
-    bottom: 0;
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
     background-color: ${theme.colors.white};
     width: 100%;
     min-height: 15rem;
     box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease-in-out;
 
     ${media.greaterThan('medium')`
       position: relative;
       border-radius: ${theme.border.radius};
       max-width: 50rem;
     `}
+
+    ${open
+      ? confirmModalWindowModifiers.open
+      : confirmModalWindowModifiers.close}
   `};
 `
 export const Message = styled.p`

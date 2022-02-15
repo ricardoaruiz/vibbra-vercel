@@ -9,6 +9,7 @@ export {
 export {
   addInvite,
   updateInvite,
+  removeUserInvite,
   getAllInvites,
   getUserInvite,
   getUserInvites,
