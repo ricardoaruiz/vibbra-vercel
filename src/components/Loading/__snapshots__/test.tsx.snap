@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loading /> should render the heading 1`] = `
+.c2 {
+  width: 2.4rem;
+  color: #030517;
+}
+
+.c0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.3);
+  display: none;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 .c1 {
+  width: 8rem;
+  color: #6be7fe;
+}
+
+<main
+  class="c0"
+>
+  <div
+    class="c1 c2"
+  >
+    <svg
+      preserveAspectRatio="xMidYMid"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g>
+        <path
+          d="M50 25A25 25 0 1 0 74.30924800994191 44.16386590360238"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="10"
+        />
+        <path
+          d="M49 15L49 35L59 25L49 15"
+          fill="currentColor"
+        />
+        <animatetransform
+          attributeName="transform"
+          dur="1.0204081632653061s"
+          keyTimes="0;1"
+          repeatCount="indefinite"
+          type="rotate"
+          values="0 50 50;360 50 50"
+        />
+      </g>
+    </svg>
+  </div>
+</main>
+`

@@ -14,6 +14,11 @@ exports[`<Template /> should render the heading 1`] = `
   fill: currentColor;
 }
 
+.c11 .c4 {
+  width: 8rem;
+  color: #6be7fe;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -301,7 +306,6 @@ exports[`<Template /> should render the heading 1`] = `
           class="c4 c5 menu_exit"
         >
           <svg
-            class="h-6 w-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -355,7 +359,6 @@ exports[`<Template /> should render the heading 1`] = `
           class="c4 c5 menu_exit"
         >
           <svg
-            class="h-6 w-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

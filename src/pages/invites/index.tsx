@@ -12,7 +12,7 @@ import * as S from '../../styles/invites'
 
 const Invites = () => {
   const router = useRouter()
-  const { userId, showErrorAlert } = usePageContext()
+  const { userId, showErrorAlert, showLoading, hideLoading } = usePageContext()
   const { getUserInvites, removeUserInvite } = useUser()
   const [invites, setInvites] = React.useState<InviteResult[]>([])
   const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false)
@@ -41,6 +41,7 @@ const Invites = () => {
    */
   const handleConfirmDeleteClick = React.useCallback(async () => {
     try {
+      showLoading()
       selectedInvite &&
         (await removeUserInvite(userId, selectedInvite.invite.user_invited))
 
@@ -56,8 +57,17 @@ const Invites = () => {
     } catch (error) {
       const serviceError = error as ServiceError
       showErrorAlert(serviceError.statusText)
+    } finally {
+      hideLoading()
     }
-  }, [removeUserInvite, selectedInvite, showErrorAlert, userId])
+  }, [
+    hideLoading,
+    removeUserInvite,
+    selectedInvite,
+    showErrorAlert,
+    showLoading,
+    userId
+  ])
 
   /**
    *
@@ -73,17 +83,20 @@ const Invites = () => {
   React.useEffect(() => {
     const loadInvites = async () => {
       try {
+        showLoading()
         const invites = await getUserInvites(userId)
         setInvites(invites || [])
       } catch (error) {
         const serviceError = error as ServiceError
         showErrorAlert(serviceError.statusText)
+      } finally {
+        hideLoading()
       }
     }
     if (userId) {
       loadInvites()
     }
-  }, [getUserInvites, showErrorAlert, userId])
+  }, [getUserInvites, hideLoading, showErrorAlert, showLoading, userId])
 
   return (
     <Template title="My Invites">

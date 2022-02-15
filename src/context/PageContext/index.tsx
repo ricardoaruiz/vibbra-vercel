@@ -21,6 +21,7 @@ const PageContextProvider: React.FC = ({ children }) => {
   const [userName, setUserName] = React.useState<string>('')
   const [message, setMessage] = React.useState('')
   const [messageType, setMessageType] = React.useState<AlertVariant>('success')
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const logoff = React.useCallback(() => {
     setUserId(0)
@@ -58,6 +59,14 @@ const PageContextProvider: React.FC = ({ children }) => {
     [message, messageType]
   )
 
+  const showLoading = React.useCallback(() => {
+    setIsLoading(true)
+  }, [])
+
+  const hideLoading = React.useCallback(() => {
+    setIsLoading(false)
+  }, [])
+
   React.useEffect(() => {
     const userId = getUserIdFromToken()
     const userName = getUserNameFromToken()
@@ -77,7 +86,10 @@ const PageContextProvider: React.FC = ({ children }) => {
     showWarningAlert,
     showErrorAlert,
     hideAlert,
-    alert
+    alert,
+    isLoading,
+    showLoading,
+    hideLoading
   }
 
   return (

@@ -38,7 +38,8 @@ const useInviteLogic = (
   invitedUserId?: number,
   operation: LogicOperation = 'create'
 ): UseInviteLogic => {
-  const { userId, showSuccessAlert, showErrorAlert } = usePageContext()
+  const { userId, showSuccessAlert, showErrorAlert, showLoading, hideLoading } =
+    usePageContext()
   const { getSimpleUsers, createUserInvite, updateUserInvite } = useUser()
 
   const [users, setUsers] = React.useState<User[]>()
@@ -71,6 +72,7 @@ const useInviteLogic = (
    */
   const handleConfirm = React.useCallback(async () => {
     try {
+      showLoading()
       const maintainUserInviteRequest = {
         user: userId,
         name: user?.name,
@@ -90,13 +92,17 @@ const useInviteLogic = (
     } catch (error) {
       const serviceError = error as ServiceError
       showErrorAlert(serviceError.message)
+    } finally {
+      hideLoading()
     }
   }, [
     createUserInvite,
     form,
+    hideLoading,
     operation,
     selectedUser,
     showErrorAlert,
+    showLoading,
     showSuccessAlert,
     updateUserInvite,
     user?.email,
@@ -104,15 +110,24 @@ const useInviteLogic = (
     userId
   ])
 
+  /**
+   *
+   */
   const handleConfirmClick = React.useCallback(() => {
     setIsConfirmModalOpen(true)
   }, [])
 
+  /**
+   *
+   */
   const handleConfirmOperation = React.useCallback(() => {
     form.handleSubmit(handleConfirm)()
     setIsConfirmModalOpen(false)
   }, [form, handleConfirm])
 
+  /**
+   *
+   */
   const handleCancelOperation = React.useCallback(() => {
     setIsConfirmModalOpen(false)
   }, [])

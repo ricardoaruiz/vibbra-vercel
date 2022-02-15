@@ -10,6 +10,10 @@ export type PageContextProviderType = {
   showErrorAlert: (message: string) => void
   hideAlert: () => void
   alert: Alert | null
+
+  isLoading: boolean
+  showLoading: () => void
+  hideLoading: () => void
 }
 
 export type Alert = {

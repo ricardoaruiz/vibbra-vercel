@@ -301,7 +301,6 @@ exports[`<Header /> should render the heading 1`] = `
           class="c4 c5 menu_exit"
         >
           <svg
-            class="h-6 w-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -355,7 +354,6 @@ exports[`<Header /> should render the heading 1`] = `
           class="c4 c5 menu_exit"
         >
           <svg
-            class="h-6 w-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
