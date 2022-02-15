@@ -22,7 +22,7 @@ export type UseUser = {
    *
    */
   updateUserInvite: (
-    params: MaintainUserInviteParams
+    params: UpdateUserInviteParams
   ) => Promise<InviteResult | undefined>
 
   /**
@@ -36,6 +36,9 @@ export type UseUser = {
 
 export type GetSimpleUsersResult = User[]
 export type MaintainUserInviteParams = Invite
+export type UpdateUserInviteParams = {
+  originalInvited: number
+} & MaintainUserInviteParams
 
 export type InviteResult = {
   invite: Invite

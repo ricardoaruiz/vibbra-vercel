@@ -10,7 +10,8 @@ import {
   MaintainUserInviteParams,
   GetSimpleUsersResult,
   InviteResult,
-  UseUser
+  UseUser,
+  UpdateUserInviteParams
 } from './types'
 import { GetUsersResponse } from 'pages/api/user/types'
 
@@ -63,10 +64,10 @@ export const useUser = (): UseUser => {
    */
   const updateUserInvite = React.useCallback(
     async (
-      params: MaintainUserInviteParams
+      params: UpdateUserInviteParams
     ): Promise<InviteResult | undefined> => {
       const response = await put<UpdateInviteResponse>(
-        `${USER_BASE_URL}/${params.user}/invite/${params.user_invited}`,
+        `${USER_BASE_URL}/${params.user}/invite/${params.originalInvited}`,
         { ...params }
       )
       return response?.data

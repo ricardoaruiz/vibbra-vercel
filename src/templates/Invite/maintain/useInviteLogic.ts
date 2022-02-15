@@ -47,6 +47,9 @@ const useInviteLogic = (
   const [selectedUser, setSelectedUser] = React.useState<number | undefined>(
     invitedUserId
   )
+  const [originalInvited, setOriginalInvited] = React.useState<
+    number | undefined
+  >(invitedUserId)
   const [isConfirmModalOpen, setIsConfirmModalOpen] = React.useState(false)
 
   const userNameRef = React.createRef<HTMLInputElement>()
@@ -85,8 +88,13 @@ const useInviteLogic = (
         setSelectedUser(undefined)
         form.reset()
       }
-      if (operation === 'update')
-        await updateUserInvite(maintainUserInviteRequest)
+      if (operation === 'update' && originalInvited) {
+        await updateUserInvite({
+          originalInvited,
+          ...maintainUserInviteRequest
+        })
+        setOriginalInvited(selectedUser)
+      }
 
       showSuccessAlert(`Invite ${operation}d with success`)
     } catch (error) {
@@ -100,6 +108,7 @@ const useInviteLogic = (
     form,
     hideLoading,
     operation,
+    originalInvited,
     selectedUser,
     showErrorAlert,
     showLoading,

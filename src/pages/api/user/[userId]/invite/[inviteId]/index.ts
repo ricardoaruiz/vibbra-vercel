@@ -75,9 +75,7 @@ const updateUserInvite = (
     }
 
     if (getUserInviteByInvitedUser(+userId, user_invited)) {
-      return res
-        .status(201)
-        .send({ invite: { name, email, user, user_invited } })
+      return res.status(422).send('This user has already invited')
     }
 
     const oldItem = updateInvite({

@@ -114,8 +114,9 @@ export const addInvite = (invite: Invite) => {
  */
 export const updateInvite = (invite: Invite) => {
   const inviteToUpdate = bd.invites.find(
-    (invite) =>
-      invite.user === invite.user && invite.user_invited === invite.user_invited
+    (currentInvite) =>
+      currentInvite.user === invite.user &&
+      currentInvite.user_invited === invite.id
   )
 
   bd.invites = bd.invites.map((currentInvite) => {
