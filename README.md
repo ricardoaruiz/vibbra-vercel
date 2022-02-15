@@ -1,3 +1,4 @@
+![til](./public/img/vibbra-logo-192.png)
 # Vibbra Compra e Venda
 
 ## 1 - Avaliação de Escopo
@@ -58,3 +59,11 @@ A versão testável pode ser vista em https://vibbra-vercel.vercel.app/
   - senha: 1234
 
 Todos eles podem acessar o sistema via opção de login SSO com token da aplicação mockado
+
+## Utilização básica no mobile
+
+![til](./public/img/gifs/mobile.gif)
+
+## Utilização básica no desktop
+
+![til](./public/img/gifs/desktop.gif)
