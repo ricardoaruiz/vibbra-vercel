@@ -1,14 +1,10 @@
 import React from 'react'
 
 import { Button, CheckIcon, ConfirmModal, Input, Template } from 'components'
-import useInviteLogic, { LogicOperation } from './useInviteLogic'
+import useInviteLogic from './useInviteLogic'
+import { MaintainInviteProps } from './types'
 
 import * as S from 'styles/invite-create'
-
-type MaintainInviteProps = {
-  operation?: LogicOperation
-  invitedUserId?: number
-}
 
 const MaintainInvite: React.VFC<MaintainInviteProps> = ({
   operation = 'create',
