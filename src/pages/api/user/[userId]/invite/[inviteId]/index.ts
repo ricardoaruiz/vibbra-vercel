@@ -70,14 +70,25 @@ const updateUserInvite = (
       return res.status(400).send(undefined)
     }
 
-    if (getUserInvite(+userId, +inviteId)) {
-      updateInvite({
-        id: +inviteId,
-        user: +userId,
-        user_invited
-      })
-      res.status(201).send({ invite: { name, email, user, user_invited } })
+    if (+userId === user_invited) {
+      return res.status(422).send("Can't invite yourself")
     }
+
+    if (getUserInviteByInvitedUser(+userId, user_invited)) {
+      return res
+        .status(201)
+        .send({ invite: { name, email, user, user_invited } })
+    }
+
+    const oldItem = updateInvite({
+      id: +inviteId,
+      user: +userId,
+      user_invited
+    })
+
+    oldItem
+      ? res.status(201).send({ invite: { name, email, user, user_invited } })
+      : res.status(404).send('User invite not found')
   } catch (error) {
     res.status(500).json('Internal Error. Please try again later.')
   }

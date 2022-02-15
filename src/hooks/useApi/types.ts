@@ -19,6 +19,15 @@ export type UseAPI = {
   ) => Promise<APIResponse<T> | undefined>
 
   /**
+   * Perform PUT requests
+   */
+  put: <T>(
+    url: string,
+    body: unknown,
+    config?: AxiosRequestConfig
+  ) => Promise<APIResponse<T> | undefined>
+
+  /**
    * Perform DELETE requests
    */
   del: <T>(

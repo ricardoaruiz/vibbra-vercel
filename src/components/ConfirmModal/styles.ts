@@ -63,8 +63,9 @@ export const ConfirmModalWindow = styled.div<ConfirmModalWindowProps>`
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
     background-color: ${theme.colors.white};
+    padding: 1rem;
     width: 100%;
-    min-height: 15rem;
+    min-height: 25rem;
     box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);
     transition: all 0.3s ease-in-out;
 
@@ -72,6 +73,7 @@ export const ConfirmModalWindow = styled.div<ConfirmModalWindowProps>`
       position: relative;
       border-radius: ${theme.border.radius};
       max-width: 50rem;
+      min-height: 20rem;
     `}
 
     ${open
@@ -83,6 +85,10 @@ export const Message = styled.p`
   ${({ theme }) => css`
     margin-top: 5rem;
     font-size: ${theme.font.sizes.large};
+
+    ${media.greaterThan('medium')`
+      font-size: ${theme.font.sizes.xlarge};
+    `}
   `};
 `
 
@@ -90,7 +96,7 @@ export const Actions = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 2rem;
+  margin-bottom: 7rem;
 
   position: absolute;
   bottom: 0;
@@ -102,4 +108,11 @@ export const Actions = styled.div`
   ${Button} + ${Button} {
     margin-left: 1rem;
   }
+
+  ${media.greaterThan('medium')`
+    margin-bottom: 2rem;
+    padding: 0 2rem;
+    justify-content: flex-end;
+    width: 100%;
+  `}
 `

@@ -43,14 +43,17 @@ export const getUserInvite = (userId: number, inviteId: number) => {
   if (!foundUser) return null
 
   const userInvite = bd.invites.find(
-    (invite) => invite.user === userId && invite.id === inviteId
+    (invite) => invite.user === userId && invite.user_invited === inviteId
   )
+  console.log('7', bd.invites, userId, inviteId)
 
   if (!userInvite) return null
 
   const invitedUser = bd.users.find(
     (user) => user.id === userInvite.user_invited
   )
+
+  console.log('8', userId, inviteId)
 
   return invitedUser
     ? {
@@ -110,11 +113,18 @@ export const addInvite = (invite: Invite) => {
  * @param invite
  */
 export const updateInvite = (invite: Invite) => {
+  const inviteToUpdate = bd.invites.find(
+    (invite) =>
+      invite.user === invite.user && invite.user_invited === invite.user_invited
+  )
+
   bd.invites = bd.invites.map((currentInvite) => {
-    return currentInvite.id === invite.id
+    return currentInvite.id === inviteToUpdate?.id
       ? { id: currentInvite.id, ...invite }
       : currentInvite
   })
+
+  return inviteToUpdate
 }
 
 /**
@@ -126,5 +136,6 @@ export const removeUserInvite = (userId: number, invitedUserId: number) => {
   const inviteToRemove = bd.invites.find(
     (invite) => invite.user === userId && invite.user_invited === invitedUserId
   )
+
   bd.invites = bd.invites.filter((invite) => invite.id !== inviteToRemove?.id)
 }

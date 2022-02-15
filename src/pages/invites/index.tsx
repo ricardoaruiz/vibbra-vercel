@@ -1,4 +1,6 @@
 import React from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { ConfirmModal, PlusIcon, Template } from 'components'
 import { ServiceError, useUser } from 'hooks'
@@ -7,9 +9,9 @@ import { usePageContext } from 'context'
 import { EditIcon, TrashIcon, Button } from 'components'
 
 import * as S from '../../styles/invites'
-import Link from 'next/link'
 
 const Invites = () => {
+  const router = useRouter()
   const { userId, showErrorAlert } = usePageContext()
   const { getUserInvites, removeUserInvite } = useUser()
   const [invites, setInvites] = React.useState<InviteResult[]>([])
@@ -23,6 +25,16 @@ const Invites = () => {
     setSelectedInvite(item)
     setIsOpenDeleteModal(true)
   }, [])
+
+  /**
+   *
+   */
+  const handleEditClick = React.useCallback(
+    (invitedUserId: number) => {
+      router.push(`/invites/${invitedUserId}/update`)
+    },
+    [router]
+  )
 
   /**
    *
@@ -87,7 +99,9 @@ const Invites = () => {
           <S.ListItem key={`${item.invite.user}_${item.invite.user_invited}`}>
             {item.invite.name}
             <S.Actions>
-              <EditIcon />
+              <EditIcon
+                onClick={() => handleEditClick(item.invite.user_invited)}
+              />
               <TrashIcon onClick={() => handleDeleteClick(item)} />
             </S.Actions>
           </S.ListItem>

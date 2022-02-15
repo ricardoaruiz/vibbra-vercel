@@ -89,6 +89,25 @@ export const useApi = (): UseAPI => {
   )
 
   /**
+   * Perform PUT requests on API
+   */
+  const put = React.useCallback(
+    async <T>(
+      url: string,
+      body: unknown,
+      config?: AxiosRequestConfig
+    ): Promise<APIResponse<T> | undefined> => {
+      try {
+        const response = await API.put<T>(url, body, config)
+        return buildAPIResponse(response)
+      } catch (error) {
+        handleError(error)
+      }
+    },
+    []
+  )
+
+  /**
    * Perform DELETE requests on API
    */
   const del = React.useCallback(
@@ -106,5 +125,5 @@ export const useApi = (): UseAPI => {
     []
   )
 
-  return { get, post, del }
+  return { get, post, put, del }
 }

@@ -1,11 +1,33 @@
 import { User } from 'hooks/model/user'
 
 export type UseUser = {
+  /**
+   *
+   */
   createUserInvite: (
-    params: CreateUserInviteParams
+    params: MaintainUserInviteParams
   ) => Promise<InviteResult | undefined>
+
+  /**
+   *
+   */
   getUserInvites: (userId: number) => Promise<InviteResult[] | undefined>
+
+  /**
+   *
+   */
   getSimpleUsers: () => Promise<GetSimpleUsersResult | undefined>
+
+  /**
+   *
+   */
+  updateUserInvite: (
+    params: MaintainUserInviteParams
+  ) => Promise<InviteResult | undefined>
+
+  /**
+   *
+   */
   removeUserInvite: (
     userId: number,
     invitedUserId: number
@@ -13,7 +35,7 @@ export type UseUser = {
 }
 
 export type GetSimpleUsersResult = User[]
-export type CreateUserInviteParams = Invite
+export type MaintainUserInviteParams = Invite
 
 export type InviteResult = {
   invite: Invite

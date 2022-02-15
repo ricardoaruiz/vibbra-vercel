@@ -3,10 +3,11 @@ import React from 'react'
 import { useApi } from '../useApi'
 import {
   CreateInviteResponse,
-  InviteListResponse
+  InviteListResponse,
+  UpdateInviteResponse
 } from 'pages/api/user/[userId]/invite/types'
 import {
-  CreateUserInviteParams,
+  MaintainUserInviteParams,
   GetSimpleUsersResult,
   InviteResult,
   UseUser
@@ -16,7 +17,7 @@ import { GetUsersResponse } from 'pages/api/user/types'
 const USER_BASE_URL = '/user'
 
 export const useUser = (): UseUser => {
-  const { get, post, del } = useApi()
+  const { get, post, put, del } = useApi()
 
   /**
    *
@@ -46,7 +47,7 @@ export const useUser = (): UseUser => {
    */
   const createUserInvite = React.useCallback(
     async (
-      params: CreateUserInviteParams
+      params: MaintainUserInviteParams
     ): Promise<InviteResult | undefined> => {
       const response = await post<CreateInviteResponse>(
         `${USER_BASE_URL}/${params.user}/invite`,
@@ -55,6 +56,22 @@ export const useUser = (): UseUser => {
       return response?.data
     },
     [post]
+  )
+
+  /**
+   *
+   */
+  const updateUserInvite = React.useCallback(
+    async (
+      params: MaintainUserInviteParams
+    ): Promise<InviteResult | undefined> => {
+      const response = await put<UpdateInviteResponse>(
+        `${USER_BASE_URL}/${params.user}/invite/${params.user_invited}`,
+        { ...params }
+      )
+      return response?.data
+    },
+    [put]
   )
 
   /**
@@ -71,5 +88,11 @@ export const useUser = (): UseUser => {
     [del]
   )
 
-  return { createUserInvite, getSimpleUsers, getUserInvites, removeUserInvite }
+  return {
+    createUserInvite,
+    getSimpleUsers,
+    getUserInvites,
+    updateUserInvite,
+    removeUserInvite
+  }
 }
