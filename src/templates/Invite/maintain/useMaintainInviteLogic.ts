@@ -1,6 +1,7 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 
-import { useForm, UseFormReturn } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
@@ -8,54 +9,30 @@ import { usePageContext } from 'context'
 import { ServiceError, useUser } from 'hooks'
 import { User } from 'hooks/model/user'
 import { MaintainUserInviteParams } from 'hooks/useUser/types'
-
-type UseInviteLogic = {
-  selectedUser: number | undefined
-  users: User[] | undefined
-  isConfirmModalOpen: boolean
-
-  userNameRef: React.RefObject<HTMLInputElement>
-  userEmailRef: React.RefObject<HTMLInputElement>
-  form: UseFormReturn<FormData, object>
-
-  handleConfirm: () => Promise<void>
-  handleUserSelect: (event: React.ChangeEvent<HTMLSelectElement>) => void
-  handleConfirmClick: () => void
-  handleConfirmOperation: () => void
-  handleCancelOperation: () => void
-}
+import { UseInviteLogic, LogicOperation, InviteFormData } from './types'
 
 const schema = yup.object().shape({
   selectedUser: yup.string().required('Select an user to invite')
 })
 
-type FormData = {
-  selectedUser: number
-}
-export type LogicOperation = 'create' | 'update'
-
-const useInviteLogic = (
-  invitedUserId?: number,
+const useMaintainInviteLogic = (
   operation: LogicOperation = 'create'
 ): UseInviteLogic => {
+  const router = useRouter()
   const { userId, showSuccessAlert, showErrorAlert, showLoading, hideLoading } =
     usePageContext()
   const { getSimpleUsers, createUserInvite, updateUserInvite } = useUser()
 
   const [users, setUsers] = React.useState<User[]>()
   const [user, setUser] = React.useState<User>()
-  const [selectedUser, setSelectedUser] = React.useState<number | undefined>(
-    invitedUserId
-  )
-  const [originalInvited, setOriginalInvited] = React.useState<
-    number | undefined
-  >(invitedUserId)
+  const [selectedUser, setSelectedUser] = React.useState<number>()
+  const [originalInvited, setOriginalInvited] = React.useState<number>()
   const [isConfirmModalOpen, setIsConfirmModalOpen] = React.useState(false)
 
   const userNameRef = React.createRef<HTMLInputElement>()
   const userEmailRef = React.createRef<HTMLInputElement>()
 
-  const form = useForm<FormData>({
+  const form = useForm<InviteFormData>({
     resolver: yupResolver(schema)
   })
 
@@ -155,6 +132,16 @@ const useInviteLogic = (
    *
    */
   React.useEffect(() => {
+    const { invitedUserId } = router.query
+    const originalInvited = invitedUserId ? +invitedUserId : 0
+    setSelectedUser(originalInvited)
+    setOriginalInvited(originalInvited)
+  }, [router])
+
+  /**
+   *
+   */
+  React.useEffect(() => {
     const user = selectedUser
       ? users?.find((user) => user.id === +selectedUser)
       : undefined
@@ -163,7 +150,15 @@ const useInviteLogic = (
     form.setValue('selectedUser', selectedUser || 0)
     if (userNameRef.current) userNameRef.current.value = user?.name || ''
     if (userEmailRef.current) userEmailRef.current.value = user?.email || ''
-  }, [form, selectedUser, userEmailRef, userNameRef, users])
+  }, [
+    form,
+    hideLoading,
+    selectedUser,
+    showLoading,
+    userEmailRef,
+    userNameRef,
+    users
+  ])
 
   return {
     selectedUser,
@@ -180,4 +175,4 @@ const useInviteLogic = (
   }
 }
 
-export default useInviteLogic
+export default useMaintainInviteLogic

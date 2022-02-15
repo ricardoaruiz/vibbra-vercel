@@ -1,14 +1,13 @@
 import React from 'react'
 
 import { Button, CheckIcon, ConfirmModal, Input, Template } from 'components'
-import useInviteLogic from './useInviteLogic'
+import useMaintainInviteLogic from './useMaintainInviteLogic'
 import { MaintainInviteProps } from './types'
 
 import * as S from 'styles/invite-create'
 
 const MaintainInvite: React.VFC<MaintainInviteProps> = ({
-  operation = 'create',
-  invitedUserId
+  operation = 'create'
 }) => {
   const {
     form,
@@ -22,7 +21,7 @@ const MaintainInvite: React.VFC<MaintainInviteProps> = ({
     handleConfirmClick,
     handleConfirmOperation,
     handleCancelOperation
-  } = useInviteLogic(invitedUserId, operation)
+  } = useMaintainInviteLogic(operation)
 
   return (
     <Template title={`Invite [${operation}]`} urlBack="/invites">

@@ -1,58 +1,60 @@
+# Vibbra Compra e Venda
 
-![React Avançado](https://raw.githubusercontent.com/React-Avancado/boilerplate/master/public/img/logo-gh.svg)
+## 1 - Avaliação de Escopo
+O escopo foi analisado e as dúvidas foram tiradas com o cliente, eventuais futuras dúvidas, faz-se necessário novas interações.
+## 2 - Estimativa em horas de todo o desenvolvimento
 
-This is a [Next.js](https://nextjs.org/) boilerplate to be used in a course called [React Avançado](https://reactavancado.com.br/).
-![ci](https://github.com/React-Avancado/boilerplate/workflows/ci/badge.svg)
-## What is inside?
+- Criação de Mock para API [08h]
+- Tela de Login [12h]
+- Tela da Home da Aplicação [12h]
+- Tela de Criação de Negociação [12h]
+- Tela de Visualização da Negociação [24h]
+	- Funcionalidades Criador de Ofertas
+	- Funcionalidades Demais Usuários
+- Tela de Minhas Negociações [12h]
+- Tela de Meus Convites [24h]
+	- Funcionalidade de Criação de Convite
+	- Funcionalidade de Alteração de Convite
+	- Funcionalidade de Remoção de Convite
 
-This project uses lot of stuff as:
+Total de horas: [104h]
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [NextJS](https://nextjs.org/)
-- [Styled Components](https://styled-components.com/)
-- [Jest](https://jestjs.io/)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- [Storybook](https://storybook.js.org/)
-- [Eslint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-- [Husky](https://github.com/typicode/husky)
+## 3 - Estimativa em dias do prazo de entrega
 
-## Getting Started
+30 dias a partir do início do desenvolvimento
 
-First, run the development server:
+## 4 - As horas foram apontadas diariamente
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 5 - Funcionalidades desenvolvidas (entregue para o teste)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 1 - Criação de Mock para ambiente de desenvolvimento
+- 2 - Tela de login (credenciais e sso)
+- 3 - Tela de meus convites
+	- Funcionalidade de criação de convite
+	- Funcionalidade de alteração de convite
+	- Funcionalidade de remoção de convite
+- 4 - Desenvolvimento de componentes customizados para o projeto que permitirão a reutilização no desenvolvimento de novas funcionalidades.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 6 - Ambiente para teste
 
-## Commands
+A versão testável pode ser vista em https://vibbra-vercel.vercel.app/
 
-- `dev`: runs your application on `localhost:3000`
-- `build`: creates the production build version
-- `start`: starts a simple server with the build production code
-- `lint`: runs the linter in all components and pages
-- `test`: runs jest to test all components and pages
-- `test:watch`: runs jest in watch mode
-- `storybook`: runs storybook on `localhost:6006`
-- `build-storybook`: create the build version of storybook
+### Usuários para utilização do sistema
 
-## Learn More
+- Usuário 1
+  - login: rruiz
+  - senha: 1234
 
-To learn more about Next.js, take a look at the following resources:
+- Usuário 2
+  - login: ccarvalho
+  - senha: 1234
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Usuário 3
+  - login: guiruiz
+  - senha: 1234
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Usuário 4
+  - login: hnaka
+  - senha: 1234
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Todos eles podem acessar o sistema via opção de login SSO com token da aplicação mockado
