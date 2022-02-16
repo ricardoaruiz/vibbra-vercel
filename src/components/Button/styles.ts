@@ -7,7 +7,7 @@ export const Button = styled.button`
     justify-content: center;
     align-items: center;
 
-    border: none;
+    border: 1px solid ${theme.colors.primary};
     border-radius: 0.5rem;
     padding: 1rem 0.5rem;
     outline: none;
@@ -23,6 +23,9 @@ export const Button = styled.button`
     }
     &:active {
       background-color: ${darken(0.3, theme.colors.primary)};
+    }
+    &:focus {
+      border: 1px solid ${theme.colors.secondary};
     }
     &:disabled {
       background-color: ${lighten(0.15, theme.colors.primary)};

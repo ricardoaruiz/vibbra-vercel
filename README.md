@@ -28,6 +28,8 @@ Total de horas: [104h]
 
 ## 5 - Funcionalidades desenvolvidas (entregue para o teste)
 
+Dentre as atividades do escopo, foram desenvolvidos o Login (credenciais e SSO) utilizando o JWT Token e toda a manutenção de convites listagem, criação, alteração e remoção (CRUD). Não foi utilizada nenhuma biblioteca de componentes prontos, todos eles foram contruídos durante o desenvolvimento.
+
 - 1 - Criação de Mock para ambiente de desenvolvimento
 - 2 - Tela de login (credenciais e sso)
 - 3 - Tela de meus convites
@@ -39,6 +41,24 @@ Total de horas: [104h]
 ## 6 - Ambiente para teste
 
 A versão testável pode ser vista em https://vibbra-vercel.vercel.app/
+
+## Tencnologias utilizadas
+
+- ReactJS
+  - Functional Components
+  - Hooks
+  - Context API
+- NextJS
+  - Static Site Generator (SSG)
+  - API Routes (mocks da API)
+- Styled Components
+- HTML
+- CSS
+- Javascript
+
+## Deploy
+
+- Foi escolhida a Vercel para o deploy, pois é um ambiente bem aderente as tecnologias utilizadas.
 
 ### Usuários para utilização do sistema
 

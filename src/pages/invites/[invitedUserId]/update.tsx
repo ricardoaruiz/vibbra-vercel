@@ -1,9 +1,9 @@
 import React from 'react'
 
-import MaintainInvite from 'templates/Invite/maintain'
+import { MaintainInviteTemplate } from 'templates/Invite/maintain'
 
 const UpdateInvite = () => {
-  return <MaintainInvite operation="update" />
+  return <MaintainInviteTemplate operation="update" />
 }
 
 export default UpdateInvite

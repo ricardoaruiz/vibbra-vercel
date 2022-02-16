@@ -31,6 +31,10 @@ exports[`<Input /> should render the heading 1`] = `
   color: #8F8F8F;
 }
 
+.c1:focus {
+  border: 1px solid #26AD9E;
+}
+
 <main
   class="c0"
 >

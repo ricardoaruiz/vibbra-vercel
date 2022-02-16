@@ -20,6 +20,10 @@ export const InternalInput = styled.input<InternalInputProps>`
     &::placeholder {
       color: ${error ? theme.colors.danger : theme.colors.gray};
     }
+
+    &:focus {
+      border: 1px solid ${theme.colors.secondary};
+    }
   `};
 `
 export const Error = styled.small`

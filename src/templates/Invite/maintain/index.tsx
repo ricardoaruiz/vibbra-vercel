@@ -4,9 +4,9 @@ import { Button, CheckIcon, ConfirmModal, Input, Template } from 'components'
 import useMaintainInviteLogic from './useMaintainInviteLogic'
 import { MaintainInviteProps } from './types'
 
-import * as S from 'styles/invite-create'
+import * as S from './styles'
 
-const MaintainInvite: React.VFC<MaintainInviteProps> = ({
+export const MaintainInviteTemplate: React.VFC<MaintainInviteProps> = ({
   operation = 'create'
 }) => {
   const {
@@ -68,5 +68,3 @@ const MaintainInvite: React.VFC<MaintainInviteProps> = ({
     </Template>
   )
 }
-
-export default MaintainInvite

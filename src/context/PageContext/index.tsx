@@ -59,11 +59,11 @@ const PageContextProvider: React.FC = ({ children }) => {
     [message, messageType]
   )
 
-  const showLoading = React.useCallback(() => {
+  const showLoading = React.useCallback((): void => {
     setIsLoading(true)
   }, [])
 
-  const hideLoading = React.useCallback(() => {
+  const hideLoading = React.useCallback((): void => {
     setIsLoading(false)
   }, [])
 

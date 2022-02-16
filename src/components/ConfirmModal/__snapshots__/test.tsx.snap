@@ -14,7 +14,7 @@ exports[`<ConfirmModal /> should render the heading 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: none;
+  border: 1px solid #6be7fe;
   border-radius: 0.5rem;
   padding: 1rem 0.5rem;
   outline: none;
@@ -33,6 +33,10 @@ exports[`<ConfirmModal /> should render the heading 1`] = `
 
 .c5:active {
   background-color: #01aecf;
+}
+
+.c5:focus {
+  border: 1px solid #26AD9E;
 }
 
 .c5:disabled {
